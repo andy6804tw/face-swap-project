@@ -1,12 +1,12 @@
 slider = new juxtapose.JXSlider('.compare',
   [
     {
-      src: './image/1.jpg',
+      src: './../FaceSwap-model/imgs/test11.jpg',
       label: 'Before',
       // credit: 'Image Credit'
     },
     {
-      src: './image/2.jpg',
+      src: './../API/FaceSwap/results/myOut.jpg',
       label: 'After',
       // credit: "Image Credit"
     }
