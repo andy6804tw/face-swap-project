@@ -15,7 +15,7 @@ def add():
     return 'user_add'
   else:
     insertValues = request.get_json()
-    return jsonify({'result':model.imagePost(insertValues)})
+    return jsonify({'result':str(FaceSwap.swapModel.ooxx(insertValues))})
 
 @swap.route('/show')
 def show():

@@ -3,6 +3,7 @@ import cv2
 import argparse
 
 import numpy as np
+import base64 
 import matplotlib.pyplot as plt
 
 from FaceSwap.face_detection import face_detection
@@ -53,68 +54,74 @@ def select_face(im, r=10):
 
     return points - np.asarray([[x, y]]), (x, y, w, h), im[y:y+h, x:x+w]
 
+# cv2 to base64
+def cv2_base64(image):
+    base64_str = cv2.imencode('.jpg',image)[1].tostring()
+    base64_str = base64.b64encode(base64_str)
+    return base64_str
 
-def ooxx():
-  # Read images
-  src_img = cv2.imread('FaceSwap/imgs/test9.jpg')
-  dst_img = cv2.imread('FaceSwap/imgs/test15.png')
-  warp_2d= False
-  correct_color = True
+def ooxx(insertValues):
+    print(insertValues)    
+    # Read images
+    src_img = cv2.imread('FaceSwap/imgs/test9.jpg')
+    dst_img = cv2.imread('FaceSwap/imgs/test15.png')
+    warp_2d= False
+    correct_color = True
 
-  # Select src face
-  src_points, src_shape, src_face = select_face(src_img)
-  # Select dst face
-  dst_points, dst_shape, dst_face = select_face(dst_img)
+    # Select src face
+    src_points, src_shape, src_face = select_face(src_img)
+    # Select dst face
+    dst_points, dst_shape, dst_face = select_face(dst_img)
 
-  h, w = dst_face.shape[:2]
+    h, w = dst_face.shape[:2]
 
-  ### Warp Image
-  if not warp_2d:
-      ## 3d warp
-      warped_src_face = warp_image_3d(src_face, src_points[:48], dst_points[:48], (h, w))
-  else:
-      ## 2d warp
-      src_mask = mask_from_points(src_face.shape[:2], src_points)
-      src_face = apply_mask(src_face, src_mask)
-      # Correct Color for 2d warp
-      if correct_color:
-          warped_dst_img = warp_image_3d(dst_face, dst_points[:48], src_points[:48], src_face.shape[:2])
-          src_face = correct_colours(warped_dst_img, src_face, src_points)
-      # Warp
-      warped_src_face = warp_image_2d(src_face, transformation_from_points(dst_points, src_points), (h, w, 3))
+    ### Warp Image
+    if not warp_2d:
+        ## 3d warp
+        warped_src_face = warp_image_3d(src_face, src_points[:48], dst_points[:48], (h, w))
+    else:
+        ## 2d warp
+        src_mask = mask_from_points(src_face.shape[:2], src_points)
+        src_face = apply_mask(src_face, src_mask)
+        # Correct Color for 2d warp
+        if correct_color:
+            warped_dst_img = warp_image_3d(dst_face, dst_points[:48], src_points[:48], src_face.shape[:2])
+            src_face = correct_colours(warped_dst_img, src_face, src_points)
+        # Warp
+        warped_src_face = warp_image_2d(src_face, transformation_from_points(dst_points, src_points), (h, w, 3))
 
-  ## Mask for blending
-  mask = mask_from_points((h, w), dst_points)
-  mask_src = np.mean(warped_src_face, axis=2) > 0
-  mask = np.asarray(mask*mask_src, dtype=np.uint8)
+    ## Mask for blending
+    mask = mask_from_points((h, w), dst_points)
+    mask_src = np.mean(warped_src_face, axis=2) > 0
+    mask = np.asarray(mask*mask_src, dtype=np.uint8)
 
-  ## Correct color
-  if warp_2d and correct_color:
-      warped_src_face = apply_mask(warped_src_face, mask)
-      dst_face_masked = apply_mask(dst_face, mask)
-      warped_src_face = correct_colours(dst_face_masked, warped_src_face, dst_points)
+    ## Correct color
+    if warp_2d and correct_color:
+        warped_src_face = apply_mask(warped_src_face, mask)
+        dst_face_masked = apply_mask(dst_face, mask)
+        warped_src_face = correct_colours(dst_face_masked, warped_src_face, dst_points)
 
-  ## Shrink the mask
-  kernel = np.ones((10, 10), np.uint8)
-  mask = cv2.erode(mask, kernel, iterations=1)
-  ##Poisson Blending
-  r = cv2.boundingRect(mask)
-  center = ((r[0] + int(r[2] / 2), r[1] + int(r[3] / 2)))
-  output = cv2.seamlessClone(warped_src_face, dst_face, mask, center, cv2.NORMAL_CLONE)
+    ## Shrink the mask
+    kernel = np.ones((10, 10), np.uint8)
+    mask = cv2.erode(mask, kernel, iterations=1)
+    ##Poisson Blending
+    r = cv2.boundingRect(mask)
+    center = ((r[0] + int(r[2] / 2), r[1] + int(r[3] / 2)))
+    output = cv2.seamlessClone(warped_src_face, dst_face, mask, center, cv2.NORMAL_CLONE)
 
-  x, y, w, h = dst_shape
-  dst_img_cp = dst_img.copy()
-  dst_img_cp[y:y+h, x:x+w] = output
-  output = dst_img_cp
+    x, y, w, h = dst_shape
+    dst_img_cp = dst_img.copy()
+    dst_img_cp[y:y+h, x:x+w] = output
+    output = dst_img_cp
 
-  print(output)
+    # print(output)
 
-  # dir_path = os.path.dirname('results/myOut.jpg')
-  # if not os.path.isdir(dir_path):
-  #     os.makedirs(dir_path)
+    # dir_path = os.path.dirname('results/myOut.jpg')
+    # if not os.path.isdir(dir_path):
+    #     os.makedirs(dir_path)
 
-  # cv2.imwrite('results/myOut.jpg', output)
-  return output
+    # cv2.imwrite('results/myOut.jpg', output)
+    return cv2_base64(output)
 
 def datas():
-  return "dghjghjhgsf"
+    return "dghjghjhgsf"
