@@ -70,11 +70,14 @@ def base64_cv2(base64_str):
 def ooxx(insertValues):
     print(insertValues)    
     # Read images
-    # src_img = cv2.imread('FaceSwap/imgs/test9.jpg')
-    # dst_img = cv2.imread('FaceSwap/imgs/test15.png')
-    src_img=base64_cv2(insertValues['image1'])
-    dst_img=base64_cv2(insertValues['image2'])
-    warp_2d= False
+    
+    if insertValues=='':
+        src_img = cv2.imread('FaceSwap/imgs/test9.jpg')
+        dst_img = cv2.imread('FaceSwap/imgs/test15.png')
+    else:
+        src_img=base64_cv2(insertValues['image1'])
+        dst_img=base64_cv2(insertValues['image2'])
+    warp_2d= True
     correct_color = True
 
     # Select src face
@@ -125,11 +128,11 @@ def ooxx(insertValues):
 
     # print(output)
 
-    # dir_path = os.path.dirname('results/myOut.jpg')
-    # if not os.path.isdir(dir_path):
-    #     os.makedirs(dir_path)
+    dir_path = os.path.dirname('FaceSwap/results/myOut.jpg')
+    if not os.path.isdir(dir_path):
+        os.makedirs(dir_path)
 
-    # cv2.imwrite('results/myOut.jpg', output)
+    cv2.imwrite('FaceSwap/results/myOut.jpg', output)
     return cv2_base64(output)
 
 def datas():
