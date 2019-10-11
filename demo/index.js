@@ -21,15 +21,15 @@ fileUploader.addEventListener('change', async (e) => {
 const postImage = async () => {
   const file = await toBase64(fileUploader.files[0]);
   const image1 = file.split(",")[1];
-  console.log(image1);
+  // console.log(image1);
   axios.post(`http://localhost:5000/swap`, {
     image1
   })
     .then((response) => {
       var dataObject = response.data;
       // POST success
-      console.log(dataObject);
-
+      const responseImg = dataObject.result.split("'")[1];
+      document.getElementById('image').src = `data:image/jpeg;base64,${responseImg}`;
     },
       (error) => {
         var message = error.response.data.message;
