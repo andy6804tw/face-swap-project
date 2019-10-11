@@ -40,7 +40,7 @@ def grid_coordinates(points):
     ymax = np.max(points[:, 1]) + 1
 
     return np.asarray([(x, y) for y in range(ymin, ymax)
-                       for x in range(xmin, xmax)], np.uint32)
+    for x in range(xmin, xmax)], np.uint32)
 
 
 def process_warp(src_img, result_img, tri_affines, dst_points, delaunay):

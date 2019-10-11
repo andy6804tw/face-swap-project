@@ -23,4 +23,4 @@ def show():
 
 @swap.route('/test')
 def ox():
-  return FaceSwap.swapModel.ooxx()
+  return FaceSwap.swapModel.ooxx('')
