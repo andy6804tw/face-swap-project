@@ -4,7 +4,7 @@ from flask import Blueprint, request,jsonify
 import model
 
 
-import FaceSwap.swapModel 
+import FaceSwap.swapModel
 
 swap = Blueprint('swap',__name__)
   
@@ -23,5 +23,4 @@ def show():
 
 @swap.route('/test')
 def ox():
-  # swapModel.ooxx()
-  return 'user_show'
+  return FaceSwap.swapModel.ooxx()

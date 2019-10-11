@@ -56,8 +56,8 @@ def select_face(im, r=10):
 
 def ooxx():
   # Read images
-  src_img = cv2.imread('imgs/test9.jpg')
-  dst_img = cv2.imread('imgs/test15.png')
+  src_img = cv2.imread('FaceSwap/imgs/test9.jpg')
+  dst_img = cv2.imread('FaceSwap/imgs/test15.png')
   warp_2d= False
   correct_color = True
 
@@ -114,3 +114,7 @@ def ooxx():
   #     os.makedirs(dir_path)
 
   # cv2.imwrite('results/myOut.jpg', output)
+  return output
+
+def datas():
+  return "dghjghjhgsf"
