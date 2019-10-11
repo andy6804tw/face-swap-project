@@ -1,8 +1,11 @@
 
 from flask import Flask,jsonify,request
+from flask_cors import CORS
 import model
 
 app = Flask(__name__)
+CORS(app)
+
 stores = [{
     'name': 'Elton',
     'items': [{'name':'my item 1', 'price': 30 }],
