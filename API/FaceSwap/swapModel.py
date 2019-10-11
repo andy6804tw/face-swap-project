@@ -68,11 +68,12 @@ def base64_cv2(base64_str):
     return image
 
 def ooxx(insertValues):
-    print(base64_cv2(insertValues['image1']))    
+    print(insertValues)    
     # Read images
     # src_img = cv2.imread('FaceSwap/imgs/test9.jpg')
+    # dst_img = cv2.imread('FaceSwap/imgs/test15.png')
     src_img=base64_cv2(insertValues['image1'])
-    dst_img = cv2.imread('FaceSwap/imgs/test15.png')
+    dst_img=base64_cv2(insertValues['image2'])
     warp_2d= False
     correct_color = True
 
