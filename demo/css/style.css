@@ -1,9 +1,13 @@
 .compare{
-  
-  background: #fff;
+  background: rgba(0, 0, 0, 0.637);
 }
 .juxtapose{
   margin: auto;
+}
+
+#image1, #image2{
+  /* max-width: 200px; */
+  max-height: 250px;
 }
 
 #parallax__wrapper {

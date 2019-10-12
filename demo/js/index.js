@@ -28,7 +28,11 @@ const postImage = async () => {
       var dataObject = response.data;
       // POST success
       const responseImg = dataObject.result.split("'")[1];
+      compareImage(dataObject.image2, responseImg);
       document.getElementById('image').src = `data:image/jpeg;base64,${responseImg}`;
+      document.getElementById('image1').src = `data:image/jpeg;base64,${dataObject.image1}`;
+      document.getElementById('image2').src = `data:image/jpeg;base64,${dataObject.image2}`;
+      console.log(dataObject)
       window.location.href = '#anchor2';
     },
       (error) => {
@@ -38,29 +42,32 @@ const postImage = async () => {
 }
 
 /** Comparison of image */
-slider = new juxtapose.JXSlider('.juxtapose',
-  [
+const compareImage= (imgBefore, imgAfter)=>{
+  document.getElementsByClassName('juxtapose')[0].innerHTML='';
+  slider = new juxtapose.JXSlider('.juxtapose',
+    [
+      {
+        src: `data:image/jpeg;base64,${imgBefore}`,
+        label: 'Before',
+        // credit: 'Image Credit'
+      },
+      {
+        src: `data:image/jpeg;base64,${imgAfter}`,
+        label: 'After',
+        // credit: "Image Credit"
+      }
+    ],
     {
-      src: './../FaceSwap-model/imgs/test11.jpg',
-      label: 'Before',
-      // credit: 'Image Credit'
-    },
-    {
-      src: './../API/FaceSwap/results/myOut.jpg',
-      label: 'After',
-      // credit: "Image Credit"
-    }
-  ],
-  {
-    animate: true,
-    showLabels: true,
-    showCredits: true,
-    startingPosition: "50%",
-    makeResponsive: true
-  });
+      animate: true,
+      showLabels: true,
+      showCredits: true,
+      startingPosition: "50%",
+      makeResponsive: true
+    });
 
 
-setTimeout(function () {
-  document.getElementsByClassName("jx-knightlab")[0].remove();
-}, 500)
+  setTimeout(function () {
+    document.getElementsByClassName("jx-knightlab")[0].remove();
+  }, 500)
+}
 
