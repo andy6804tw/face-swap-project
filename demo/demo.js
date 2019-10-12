@@ -20,4 +20,7 @@ slider = new juxtapose.JXSlider('.compare',
   });
 
 
+  setTimeout(function(){
+    document.getElementsByClassName("jx-knightlab")[0].remove();
+  },500)
 
