@@ -49,7 +49,9 @@
 }
 
 header .parallax__layer__back {
-  background-image: url("https://goo.gl/KpR86D");
+  /* background-image: url("https://goo.gl/KpR86D"); */
+  background: #7d7ea0;
+  background: linear-gradient(135deg, #f5515f 0%, #05abe0 100%);
 }
 
 section:nth-of-type(odd) .parallax__layer__base {
@@ -84,7 +86,6 @@ footer,
   text-align: center;
 }
 
-header .parallax__layer__back,
 section:nth-of-type(4) .parallax__layer__back {
   -webkit-filter: grayscale(80%);
           filter: grayscale(80%);
