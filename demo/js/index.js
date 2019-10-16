@@ -29,7 +29,7 @@ const postImage = async () => {
       // POST success
       const responseImg = dataObject.result.split("'")[1];
       compareImage(dataObject.image2, responseImg);
-      document.getElementById('image').src = `data:image/jpeg;base64,${responseImg}`;
+      // document.getElementById('image').src = `data:image/jpeg;base64,${responseImg}`;
       document.getElementById('image1').src = `data:image/jpeg;base64,${dataObject.image1}`;
       document.getElementById('image2').src = `data:image/jpeg;base64,${dataObject.image2}`;
       console.log(dataObject)
