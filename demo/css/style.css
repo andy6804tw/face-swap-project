@@ -132,6 +132,14 @@ nav a:hover {
   opacity: 0.5;
 }
 
+nav a:active{
+  color: #fff;
+}
+
+.contain a{
+  color: #fff;
+} 
+
 
 footer {
   display: table;
