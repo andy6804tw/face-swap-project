@@ -10,11 +10,22 @@
   <link rel="stylesheet" href="https://cdn.knightlab.com/libs/juxtapose/latest/css/juxtapose.css">
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/loading.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
-  <!-- partial:index.partial.html -->
+  <!-- Loading -->
+  <div class="loading d-none" id="loading">
+    <div>
+      <div class="c1"></div>
+      <div class="c2"></div>
+      <div class="c3"></div>
+      <div class="c4"></div>
+    </div>
+    <span>loading...</span>
+  </div>
+  <!-- Loading END -->
 
   <div id="parallax__wrapper">
     <header class="parallax__group">

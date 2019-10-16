@@ -19,6 +19,7 @@ const postImage = async () => {
   const image1 = file1.split(",")[1];
   const file2 = await toBase64(dst_img.files[0]);
   const image2 = file2.split(",")[1];
+  document.getElementById("loading").classList.remove("d-none");
   // console.log(image1);
   axios.post(`http://localhost:5000/swap`, {
     image1,
@@ -34,6 +35,7 @@ const postImage = async () => {
       document.getElementById('image2').src = `data:image/jpeg;base64,${dataObject.image2}`;
       console.log(dataObject)
       window.location.href = '#anchor2';
+      document.getElementById("loading").classList.add("d-none");
     },
       (error) => {
         var message = error.response.data.message;
