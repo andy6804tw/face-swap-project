@@ -8,5 +8,7 @@ CORS(app)
 app.register_blueprint(swap, url_prefix='/swap')
 
 
-
+@app.route('/test', methods=['GET'])
+def home():
+    return "<h1>Hello Flask!</h1>"
 
