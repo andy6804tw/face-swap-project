@@ -1,18 +1,15 @@
 from flask import Blueprint, request,jsonify
-from flask_uploads import UploadSet, IMAGES,\
-patch_request_class, AllExcept
+from flask_uploads import UploadSet, IMAGES,patch_request_class, AllExcept
 
 
 upload = Blueprint('upload',__name__)
-
-photos = UploadSet('photos',extensions=AllExcept(()))
-# configure_uploads(upload, photos)
+upFile = UploadSet('upFile',extensions=AllExcept(()))
 
 @upload.route('', methods=['GET','POST'])
-def uploadImage():
-  if request.method == 'POST' and 'photo' in request.files:
-        filename = photos.save(request.files['photo'])
-        file_url = photos.url(filename)
+def uploadFile():
+  if request.method == 'POST' and 'file'  in request.files:
+        filename = upFile.save(request.files['file'])
+        file_url = upFile.url(filename)
         return 'don'
   else:
     return 'hi'

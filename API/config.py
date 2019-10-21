@@ -1,4 +1,4 @@
 DEBUG = True
-SECRET_KEY = 'abcdefg'
+SECRET_KEY = 'files'
 # 设置文件路径
-UPLOADED_PHOTOS_DEST = 'app/static'
+UPLOADED_UPFILE_DEST = 'app/static'
