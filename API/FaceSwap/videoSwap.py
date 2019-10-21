@@ -4,10 +4,10 @@ import dlib
 import logging
 import time
 import argparse
-from config import *
-from face_detect_and_track import *
-from face_points_detection import *
-from face_swap import *
+from FaceSwap.config import *
+from FaceSwap.face_detect_and_track import *
+from FaceSwap.face_points_detection import *
+from FaceSwap.face_swap import *
 
 
 class VideoHandler(object):
@@ -37,22 +37,25 @@ class VideoHandler(object):
         self.src_points = face_points_detection(self.src_img, src_face_rect)
 
         # shrink the size of src image, to speed up. Although it is not obvious.
-        src_points_face = self.src_img.copy()
-        for (point_index, point) in enumerate(self.src_points):
-            cv2.circle(src_points_face,
-                       (point[0], point[1]), 2, (0, 0, 255), -1)
+        # src_points_face = self.src_img.copy()
+        # for (point_index, point) in enumerate(self.src_points):
+        #     cv2.circle(src_points_face,
+        #                (point[0], point[1]), 2, (0, 0, 255), -1)
         logging.info('''Select the Face and then press SPACE or ENTER button!
 Cancel the selection process by pressing c button!''')
-        while True:
-            initBB = cv2.selectROI("src_roi", src_points_face,
-                                   fromCenter=False, showCrosshair=False)
-            if initBB != (0, 0, 0, 0):
-                break
-        cv2.destroyWindow("src_roi")
-        (x, y, w, h) = initBB
-        self.src_points -= (x, y)
-        self.src_img = self.src_img[y:y + h, x:x + w]
-
+        # while True:
+        #     initBB = cv2.selectROI("src_roi", src_points_face,
+        #                            fromCenter=False, showCrosshair=False)
+        #     if initBB != (0, 0, 0, 0):
+        #         break
+        # cv2.destroyWindow("src_roi")
+        # (x, y, w, h) = initBB
+        # (x, y, w, h)=(90 ,266, 372 ,402)
+        # print(x,y,h,w)
+        # self.src_points -= (x, y)
+        # self.src_img = self.src_img[y:y + h, x:x + w]
+        # print(self.src_points)
+        
         src_mask = mask_from_points(self.src_img.shape[:2], self. src_points)
         self.src_only_face = apply_mask(self.src_img, src_mask)
 
@@ -176,6 +179,7 @@ Cancel the selection process by pressing c button!''')
     def cascade_vh(self):
         face_flag = 0
         target_lose_cnt = 0
+        checked=True
         while (cv2.waitKey(1) != 27):
             start_tc = cv2.getTickCount()
             grabbed, frame = self.cap.read()
@@ -187,7 +191,7 @@ Cancel the selection process by pressing c button!''')
                 face_bbox = self.detector.face_detection(frame)
                 # No face has been detected
                 if isinstance(face_bbox, int):
-                    cv2.imshow("frame", frame)
+                    # cv2.imshow("frame", frame)
                     continue
                 # detect successfully
                 else:
@@ -204,7 +208,7 @@ Cancel the selection process by pressing c button!''')
                     if not success:
                         logging.debug("update failed")
                         target_lose_cnt += 1
-                        cv2.imshow("frame", frame)
+                        # cv2.imshow("frame", frame)
                         continue
 
                     (old_x, old_y, old_w, old_h) = (int(v)
@@ -217,7 +221,7 @@ Cancel the selection process by pressing c button!''')
                         frame[old_y:old_y + old_h, old_x:old_x + old_w])
                     if isinstance(face_bbox, int):
                         target_lose_cnt += 1
-                        cv2.imshow("frame", frame)
+                        # cv2.imshow("frame", frame)
                         continue
                     target_lose_cnt = 0
                     face_bbox = self.expand_bbox(*face_bbox)
@@ -230,7 +234,7 @@ Cancel the selection process by pressing c button!''')
                     # reset tracker
                     self.tracker = Tracker()
                     face_flag = 0
-                    cv2.imshow("frame", frame)
+                    # cv2.imshow("frame", frame)
                     continue
 
             # self.draw_rect(frame,face_bbox,(0,255,0))
@@ -239,12 +243,21 @@ Cancel the selection process by pressing c button!''')
             if not success:
                 pass
 
-            cv2.imshow("output", frame)
-
+            # cv2.imshow("output", frame)
+            # build video
+            height, width, layers = frame.shape
+            if checked:
+                # fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+                fourcc = cv2.VideoWriter_fourcc('a', 'v', 'c', '1')
+                video = cv2.VideoWriter('app/static/out.mp4' , fourcc, 8, (width,height))
+                checked=False
+            video.write(frame)
             end_tc = cv2.getTickCount()
             fps = cv2.getTickFrequency() / (end_tc - start_tc)
             logging.info("fps {}".format(fps))
         cv2.destroyAllWindows()
+        # release video
+        video.release()
         self.cap.release()
 
     # For DEBUG
@@ -261,18 +274,19 @@ Cancel the selection process by pressing c button!''')
         return img
 
 
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO,
-                        format="%(levelname)s:%(lineno)d:%(message)s")
-    parser = argparse.ArgumentParser(description='FaceSwap Video')
-    parser.add_argument('--src_img', required=True,
-                        help='Path for source image')
-    parser.add_argument('--video_path', default=0,
-                        help='Path for video')
-    args = parser.parse_args()
-    
-    video_path = args.video_path
-    test = VideoHandler(video_path)
-    test.set_src_img(args.src_img)
-    test.process_src_img()
-    test.cascade_vh()
+def i2vSwap():
+    # logging.basicConfig(level=logging.INFO,
+    #                     format="%(levelname)s:%(lineno)d:%(message)s")
+
+    # parser = argparse.ArgumentParser(description='FaceSwap Video')
+    # parser.add_argument('--src_img', required=True,
+    #                     help='Path for source image')
+    # parser.add_argument('--video_path', default=0,
+    #                     help='Path for video')
+    # args = parser.parse_args()
+    # video_path = args.video_path
+    # test = VideoHandler(video_path)
+    # test.set_src_img(args.src_img)
+    # test.process_src_img()
+    # return test.cascade_vh()
+    return 'sdad'

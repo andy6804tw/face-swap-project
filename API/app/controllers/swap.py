@@ -1,9 +1,9 @@
 #coding:utf-8
 #swap
-from flask import Blueprint, request,jsonify
-
+from flask import Blueprint, request,jsonify,redirect
 
 import FaceSwap.imageSwap as imageSwap
+import FaceSwap.videoSwap as videoSwap
 
 swap = Blueprint('swap',__name__)
   
@@ -18,7 +18,11 @@ def add():
     image2=insertValues['image2']
     return jsonify({'result':str(imageSwap.i2iSwap(insertValues)),'image1':image1,'image2':image2})
 
+@swap.route('/video')
+def video():
+    return videoSwap.i2vSwap()
+
 @swap.route('/show')
 def show():
-  return 'user_show'
+    return redirect('API/FaceSwap/video/out.avi')
   
