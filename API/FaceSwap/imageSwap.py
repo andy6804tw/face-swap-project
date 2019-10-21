@@ -67,10 +67,8 @@ def base64_cv2(base64_str):
     image = cv2.imdecode(nparr,cv2.IMREAD_COLOR)
     return image
 
-def ooxx(insertValues):
-    print(insertValues)    
+def i2iSwap(insertValues):
     # Read images
-    
     if insertValues=='':
         src_img = cv2.imread('FaceSwap/imgs/test9.jpg')
         dst_img = cv2.imread('FaceSwap/imgs/test15.png')
