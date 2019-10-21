@@ -275,17 +275,19 @@ Cancel the selection process by pressing c button!''')
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO,
-                        format="%(levelname)s:%(lineno)d:%(message)s")
+    # logging.basicConfig(level=logging.INFO,
+    #                     format="%(levelname)s:%(lineno)d:%(message)s")
 
-    parser = argparse.ArgumentParser(description='FaceSwap Video')
-    parser.add_argument('--src_img', required=True,
-                        help='Path for source image')
-    parser.add_argument('--video_path', default=0,
-                        help='Path for video')
-    args = parser.parse_args()
-    video_path = args.video_path
-    test = VideoHandler(video_path)
-    test.set_src_img(args.src_img)
+    # parser = argparse.ArgumentParser(description='FaceSwap Video')
+    # parser.add_argument('--src_img', required=True,
+    #                     help='Path for source image')
+    # parser.add_argument('--video_path', default=0,
+    #                     help='Path for video')
+    # args = parser.parse_args()
+    # video_path = args.video_path
+    # test = VideoHandler(video_path)
+    # test.set_src_img(args.src_img)
+    test = VideoHandler('video/test2.mov')
+    test.set_src_img('imgs/test20.jpg')
     test.process_src_img()
     test.cascade_vh()
