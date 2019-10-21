@@ -135,5 +135,5 @@ def ooxx(insertValues):
     cv2.imwrite('FaceSwap/results/myOut.jpg', output)
     return cv2_base64(output)
 
-def datas():
+def test():
     return "dghjghjhgsf"

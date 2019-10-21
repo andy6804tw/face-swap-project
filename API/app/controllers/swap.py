@@ -1,7 +1,6 @@
 #coding:utf-8
 #swap
 from flask import Blueprint, request,jsonify
-import model
 
 
 import FaceSwap.swapModel
@@ -12,7 +11,7 @@ swap = Blueprint('swap',__name__)
 @swap.route('', methods=['GET','POST'])
 def add():
   if request.method == 'GET':
-    return 'user_add'
+    return 'Swap Route'
   else:
     insertValues = request.get_json()
     image1=insertValues['image1']

@@ -1,5 +1,6 @@
 # result folder
 FaceSwap-model/results
+API/FaceSwap/results
 
 # VScode
 .vscode
