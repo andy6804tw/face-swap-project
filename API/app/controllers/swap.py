@@ -3,7 +3,7 @@
 from flask import Blueprint, request,jsonify
 
 
-import FaceSwap.swapModel
+import FaceSwap.imageSwap as imageSwap
 
 swap = Blueprint('swap',__name__)
   
@@ -11,17 +11,14 @@ swap = Blueprint('swap',__name__)
 @swap.route('', methods=['GET','POST'])
 def add():
   if request.method == 'GET':
-    return 'Swap Route'
+    return jsonify({'result': str(imageSwap.ooxx(''))})
   else:
     insertValues = request.get_json()
     image1=insertValues['image1']
     image2=insertValues['image2']
-    return jsonify({'result':str(FaceSwap.swapModel.ooxx(insertValues)),'image1':image1,'image2':image2})
+    return jsonify({'result':str(imageSwap.ooxx(insertValues)),'image1':image1,'image2':image2})
 
 @swap.route('/show')
 def show():
   return 'user_show'
-
-@swap.route('/test')
-def ox():
-  return FaceSwap.swapModel.ooxx('')
+  
