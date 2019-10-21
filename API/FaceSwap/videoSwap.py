@@ -259,6 +259,7 @@ Cancel the selection process by pressing c button!''')
         # release video
         video.release()
         self.cap.release()
+        return 'done'
 
     # For DEBUG
     def single_dst(self, dst_img):
@@ -285,8 +286,7 @@ def i2vSwap():
     #                     help='Path for video')
     # args = parser.parse_args()
     # video_path = args.video_path
-    test = VideoHandler('video/test2.mov')
-    test.set_src_img('imgs/test20.jpg')
+    test = VideoHandler('FaceSwap/video/test2.mov')
+    test.set_src_img('FaceSwap/imgs/test20.jpg')
     test.process_src_img()
-    # return test.cascade_vh()
-    return 'sdad'
+    return test.cascade_vh()
