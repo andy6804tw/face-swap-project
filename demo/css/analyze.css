@@ -31,13 +31,10 @@ section{
   
 }
 
-img{
-  width: 100%;
-}
 .image{
-  width: 100px;
-  height: 100px;
-  margin-top: 50px;
+  width: 150px;
+  height: 150px;
+  margin-top: 40px;
 }
 
 .card-title-blue{
