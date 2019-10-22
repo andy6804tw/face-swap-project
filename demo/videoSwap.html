@@ -17,7 +17,8 @@
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet'>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/style-white.css">
   <link rel="stylesheet" href="./css/move-top.css">
   <link rel="stylesheet" href="./css/loading.css">
@@ -29,6 +30,7 @@
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/heatmap.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="//vjs.zencdn.net/7.3.0/video.min.js"></script>
 
 </head>
 
@@ -127,7 +129,9 @@
           </form>
         </section>
         <section class="px-5 py-4 text-center">
-          <video id="videoPlayer" class="d-none" width="720" controls>
+          <!-- <video id="videoPlayer" class="d-none" width="720" controls>
+          </video> -->
+          <video id="videoPlayer" class="video-js vjs-big-play-centered d-none" controls autoplay preload="auto">
           </video>
         </section>
 

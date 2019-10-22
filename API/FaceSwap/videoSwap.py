@@ -180,6 +180,7 @@ Cancel the selection process by pressing c button!''')
         face_flag = 0
         target_lose_cnt = 0
         checked=True
+        ts = int(time.time())
         while (cv2.waitKey(1) != 27):
             start_tc = cv2.getTickCount()
             grabbed, frame = self.cap.read()
@@ -249,7 +250,7 @@ Cancel the selection process by pressing c button!''')
             if checked:
                 # fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
                 fourcc = cv2.VideoWriter_fourcc('a', 'v', 'c', '1')
-                video = cv2.VideoWriter('app/static/out.mp4' , fourcc, 8, (width,height))
+                video = cv2.VideoWriter('app/static/'+str(ts)+'-out.mp4' , fourcc, 8, (width,height))
                 checked=False
             video.write(frame)
             end_tc = cv2.getTickCount()
@@ -259,7 +260,7 @@ Cancel the selection process by pressing c button!''')
         # release video
         video.release()
         self.cap.release()
-        return 'done'
+        return str(ts)
 
     # For DEBUG
     def single_dst(self, dst_img):

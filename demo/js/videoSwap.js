@@ -37,11 +37,15 @@ const addFile = () => {
                 console.log(dataObject);
                 // Render result video
                 const videoPlayer = document.getElementById("videoPlayer");
-                videoPlayer.innerHTML='';
-                const source = document.createElement("source");
-                source.src = "http://localhost:5000/static/out.mp4";
-                videoPlayer.appendChild(source);
+                videoPlayer.innerHTML = '';
                 videoPlayer.classList.remove("d-none");
+                const player = videojs('videoPlayer', {
+                  sources: [{ src: `http://localhost:5000/static/${dataObject}-out.mp4` }],
+                  loop: false,
+                  autoplay: 'muted',
+                  width: "720",
+                  controls: true
+                });
                 document.getElementById("loading").classList.add("d-none");
               },
                 (error) => {
@@ -52,4 +56,26 @@ const addFile = () => {
       })
   }
 }
+
+// const videoPlayer = document.getElementById("videoPlayer");
+// videoPlayer.innerHTML = '';
+// const source = document.createElement("source");
+// source.setAttribute('src', "http://localhost:5000/static/out.mp4");
+// videoPlayer.load();
+// videoPlayer.play();
+// videoPlayer.appendChild(source);
+// videoPlayer.classList.remove("d-none");
+
+// const videoPlayer = document.getElementById("videoPlayer");
+// videoPlayer.innerHTML = '';
+// videoPlayer.classList.remove("d-none");
+// const player = videojs('videoPlayer', {
+//   sources: [{ src: "http://localhost:5000/static/out.mp4" }],
+//   loop: false,
+//   autoplay: 'muted',
+//   width: "720",
+//   controls: true
+// });
+
+
 
