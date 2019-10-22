@@ -40,7 +40,7 @@ const addFile = () => {
                 videoPlayer.innerHTML = '';
                 videoPlayer.classList.remove("d-none");
                 const player = videojs('videoPlayer', {
-                  sources: [{ src: `http://localhost:5000/static/${dataObject}-out.mp4` }],
+                  sources: [{ src: `http://localhost:5000/static/${dataObject.token}-out.mp4` }],
                   loop: false,
                   autoplay: 'muted',
                   width: "720",
