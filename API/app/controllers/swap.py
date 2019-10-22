@@ -20,9 +20,10 @@ def add():
 
 @swap.route('/video')
 def video():
-    return videoSwap.i2vSwap()
+  result=videoSwap.i2vSwap()
+  return  result
 
 @swap.route('/show')
 def show():
-    return redirect('API/FaceSwap/video/out.avi')
+  return redirect('API/FaceSwap/video/out.avi')
   
