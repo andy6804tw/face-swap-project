@@ -31,7 +31,22 @@ const addFile = () => {
           .then(function (response) {
             var dataObject = response.data;
             console.log(dataObject);
-            document.getElementById("loading").classList.add("d-none");
+            axios.get(`http://localhost:5000/swap/video`)
+              .then((response) => {
+                const dataObject = response.data;
+                console.log(dataObject);
+                // Render result video
+                const videoPlayer = document.getElementById("videoPlayer");
+                const source = document.createElement("source");
+                source.src = "http://localhost:5000/static/out.mp4";
+                videoPlayer.appendChild(source);
+                videoPlayer.classList.remove("d-none");
+                document.getElementById("loading").classList.add("d-none");
+              },
+                (error) => {
+                  var message = error.response.data.message;
+                }
+              );
           })
       })
   }
