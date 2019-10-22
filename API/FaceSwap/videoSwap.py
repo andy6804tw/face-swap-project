@@ -32,7 +32,8 @@ class VideoHandler(object):
     def process_src_img(self):
         src_face = self.detector.face_detection(self.src_img)
         if isinstance(src_face, int):
-            raise Exception("No face detected in src image!")
+            # raise Exception("No face detected in src image!")
+            return False
         src_face_rect = self.bbox_to_rect(src_face)
         self.src_points = face_points_detection(self.src_img, src_face_rect)
 
@@ -58,6 +59,7 @@ Cancel the selection process by pressing c button!''')
         
         src_mask = mask_from_points(self.src_img.shape[:2], self. src_points)
         self.src_only_face = apply_mask(self.src_img, src_mask)
+        return True
 
     def run_face_swap(self, dst_img, dst_face_rect: dlib.rectangle):
         if True:
@@ -289,5 +291,8 @@ def i2vSwap():
     # video_path = args.video_path
     test = VideoHandler('app/static/srcVideo.mov')
     test.set_src_img('app/static/srcImage.jpg')
-    test.process_src_img()
-    return test.cascade_vh()
+    result=test.process_src_img()
+    if(result):
+        return test.cascade_vh()
+    else:
+        return 'No face detected in src image!'
