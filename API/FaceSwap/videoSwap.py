@@ -286,7 +286,7 @@ def i2vSwap():
     #                     help='Path for video')
     # args = parser.parse_args()
     # video_path = args.video_path
-    test = VideoHandler('FaceSwap/video/test2.mov')
-    test.set_src_img('FaceSwap/imgs/test20.jpg')
+    test = VideoHandler('app/static/srcVideo.mov')
+    test.set_src_img('app/static/srcImage.jpg')
     test.process_src_img()
     return test.cascade_vh()
