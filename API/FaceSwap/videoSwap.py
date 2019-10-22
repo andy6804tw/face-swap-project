@@ -4,6 +4,7 @@ import dlib
 import logging
 import time
 import argparse
+from flask import jsonify
 from FaceSwap.config import *
 from FaceSwap.face_detect_and_track import *
 from FaceSwap.face_points_detection import *
@@ -291,8 +292,9 @@ def i2vSwap():
     # video_path = args.video_path
     test = VideoHandler('app/static/srcVideo.mov')
     test.set_src_img('app/static/srcImage.jpg')
-    result=test.process_src_img()
-    if(result):
-        return test.cascade_vh()
+    processResult=test.process_src_img()
+    if(processResult):
+        result =test.cascade_vh()
+        return jsonify({'result':200,'token':result})
     else:
-        return 'No face detected in src image!'
+        return jsonify({'result':401,'message':'No face detected in src image!'})
