@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta property="og:locale" content="zh_TW">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" content="Dashboard">
+  <meta property="og:title" content="Dashboard">
+  <meta property="og:description" content="Dashboard">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="./image/favicon.ico">
+  <title>Dashboard</title>
+  <link rel="shortcut icon" href="./image/favicon.ico">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/style-white.css">
+  <link rel="stylesheet" href="./css/move-top.css">
+  <link rel="stylesheet" href="./css/loading.css">
+  <link rel="stylesheet" href="./css/survey.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+</head>
+
+<body>
+  <!-- Loading -->
+  <div class="loading d-none" id="loading">
+    <div>
+      <div class="c1"></div>
+      <div class="c2"></div>
+      <div class="c3"></div>
+      <div class="c4"></div>
+    </div>
+    <span>loading...</span>
+  </div>
+  <!-- Loading END -->
+  <div class="site-container">
+    <div class="site-pusher">
+      <!-- Navigation bar -->
+      <header class="header">
+        <a href="#" class="header__icon" id="header__icon" onclick="onMenu()"></a>
+        <!-- if center logo => d-flex justify-content-center -->
+        <div class="pt-3"><a href="../index.html" class="header__logo">
+            <h4>Dashboard</h4>
+          </a></div>
+        <div class="justify-content-center align-items-center text-right">
+          <!-- Dropdown -->
+          <div class="nav-item dropdown" id="toggle" expanded="true" style="display:inline-block">
+            <a class="nav-link p-0 px-4" href="#" id="navbardrop" data-toggle="dropdown">
+              <span><img class="user mx-2" src="./image/user.jpg" alt="" srcset=""></span>
+              <i class="fas fa-chevron-down"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right mt-2" id="dropdown">
+              <a class="dropdown-item" href="javascript:void(0)" onclick="call()">
+                <i class="fas fa-cog fa-fw"></i> Setting
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="javascritp: return false;" onclick="logout()">
+                <i class="fas fa-sign-out-alt fa-fw"></i>
+                Logout
+              </a>
+            </div>
+          </div>
+        </div>
+        <nav class="menu">
+          <div class="item">
+            <a href="../index.html"><i class="far fa-address-card"></i> Home</a>
+          </div>
+          <div class="item">
+            <a href="../fmlProcess.html"><i class="far fa-address-card"></i> FIS Process</a>
+          </div>
+          <div class="item">
+            <a href="../upload.html"><i class="far fa-address-card"></i> Upload</a>
+          </div>
+          <div class="item">
+            <a href="../detail.html"><i class="far fa-address-card"></i> Detail</a>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Context 內容 -->
+      <div class="container my-4">
+        <section class="px-5 py-4">
+          <form class="sky-form" action="javascript:void(0);" method="post" name="dataForm">
+            <header>Upload</header>
+            <!-- Data upload -->
+            <fieldset>
+              <!-- Indicator(csv) -->
+              <section style="max-width: 300px">
+                <label class="label">Source Image</label>
+                <label for="file" class="input input-file">
+                  <div class="button"><input type="file" id="indicatorFile"
+                      onchange="this.parentNode.nextSibling.value = this.files[0].name" />Browse
+                  </div><input type="text" readonly="" />
+                </label>
+              </section>
+              <!-- EEG file zip -->
+              <section style="max-width: 300px">
+                <label class="label">Transfer Video</label>
+                <label for="file" class="input input-file">
+                  <div class="button"><input type="file" id="eegFile"
+                      onchange="this.parentNode.nextSibling.value = this.files[0].name" />Browse
+                  </div><input type="text" readonly="" />
+                </label>
+              </section>
+            </fieldset>
+            <footer>
+              <button type="submit" class="button" onclick="addData()">Submit</button>
+              <button type="reset" class="button button-secondary">Reset</button>
+            </footer>
+          </form>
+        </section>
+
+      </div><!-- END context -->
+
+
+      <div class="site-cache" id="site-cache" onclick="offMenu()"></div>
+    </div> <!-- END site-pusher -->
+  </div> <!-- END site-container -->
+  <!-- Modal start -->
+  <div id="static-modal" class="modal fade" tabindex="-1" role="dialog" style="display: none; padding-right: 0px;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+          <h4 class="modal-title">Setting</h4>
+        </div>
+        <div class="modal-body">
+          <div class="my-2">
+            IP Address: <input id="ipInput" type="text" value="127.0.0.1"><br />
+          </div>
+          <div class="my-2">
+            PORT: <input id="portInput" type="text" value="5000"><br />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="buttonOK()">OK</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+  <!-- Modal end -->
+  <!-- Modal Model2 -->
+  <div id="modal-dialog" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> -->
+          <h4 class="modal-title">Upload</h4>
+        </div>
+        <div class="modal-body">
+          <p id="text">Comming Soon !</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" id="buttonOK">OK</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!-- Scroll to top -->
+  <p class="cd-top text--replace js-cd-top" id="back-top">
+    <a href="#"><span></span></a>
+  </p>
+
+  <script src="./js/index.js"></script>
+  <!-- <script src="../js/modal.min.js"></script> -->
+</body>
+
+</html>
