@@ -1,75 +1,80 @@
-const fileUploader = document.querySelector('#file-uploader');
-const dst_img = document.getElementById("dst_img");
+"use strict";
 
-const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
-});
-fileUploader.addEventListener('change', async (e) => {
+/** Navigation bar */
+function onMenu() {
+  document.body.classList.add("with--sidebar"); // add listener to disable scroll
 
-  // console.log(e.target.files[0]); // get file object
-});
-
-
-
-const postImage = async () => {
-  const file1 = await toBase64(fileUploader.files[0]);
-  const image1 = file1.split(",")[1];
-  const file2 = await toBase64(dst_img.files[0]);
-  const image2 = file2.split(",")[1];
-  document.getElementById("loading").classList.remove("d-none");
-  // console.log(image1);
-  axios.post(`http://localhost:5000/swap`, {
-    image1,
-    image2
-  })
-    .then((response) => {
-      var dataObject = response.data;
-      // POST success
-      const responseImg = dataObject.result.split("'")[1];
-      compareImage(dataObject.image2, responseImg);
-      // document.getElementById('image').src = `data:image/jpeg;base64,${responseImg}`;
-      document.getElementById('image1').src = `data:image/jpeg;base64,${dataObject.image1}`;
-      document.getElementById('image2').src = `data:image/jpeg;base64,${dataObject.image2}`;
-      console.log(dataObject)
-      window.location.href = '#anchor2';
-      document.getElementById("loading").classList.add("d-none");
-    },
-      (error) => {
-        var message = error.response.data.message;
-      }
-    );
+  window.addEventListener('scroll', noscroll);
 }
 
-/** Comparison of image */
-const compareImage= (imgBefore, imgAfter)=>{
-  document.getElementsByClassName('juxtapose')[0].innerHTML='';
-  slider = new juxtapose.JXSlider('.juxtapose',
-    [
-      {
-        src: `data:image/jpeg;base64,${imgBefore}`,
-        label: 'Before',
-        // credit: 'Image Credit'
-      },
-      {
-        src: `data:image/jpeg;base64,${imgAfter}`,
-        label: 'After',
-        // credit: "Image Credit"
-      }
-    ],
-    {
-      animate: true,
-      showLabels: true,
-      showCredits: true,
-      startingPosition: "50%",
-      makeResponsive: true
-    });
+function offMenu() {
+  document.body.classList.remove("with--sidebar"); // Remove listener to disable scroll
+
+  window.removeEventListener('scroll', noscroll);
+} // disable scroll window
 
 
-  setTimeout(function () {
-    document.getElementsByClassName("jx-knightlab")[0].remove();
-  }, 500)
+function noscroll() {
+  window.scrollTo(0, 0);
 }
+/** Nav Toggle(right) */
 
+
+var toggle = document.getElementById('toggle');
+var dropdown = document.getElementById('dropdown');
+var toggleNavbar = document.getElementById('toggleNavbar');
+document.body.addEventListener('click', function (evt) {
+  if (toggle.getAttribute("expanded") == "false") {
+    dropdown.classList.remove("show");
+    toggle.setAttribute("expanded", "true");
+  }
+});
+toggle.addEventListener('click', function (event) {
+  if (toggle.getAttribute("expanded") == "true") {
+    dropdown.classList.add("show");
+    toggle.setAttribute("expanded", "false");
+  } else {
+    dropdown.classList.remove("show");
+    toggle.setAttribute("expanded", "true");
+  }
+
+  event.stopPropagation();
+}); 
+
+// // localstorage
+// var brainLocalStorage = localStorage.getItem('brain-dashboard') ? JSON.parse(localStorage.getItem('brain-dashboard')) : {
+//   port: 5000,
+//   ipAddress: '192.168.50.21'
+// };
+// localStorage.setItem('brain-dashboard', JSON.stringify(brainLocalStorage)); // Port PORT input
+
+// var portInput = document.getElementById('portInput'); // IP Address input
+
+// var ipInput = document.getElementById('ipInput'); // init input data value
+
+// portInput.value = brainLocalStorage.port;
+// ipInput.value = brainLocalStorage.ipAddress; // Modal 
+
+// function call() {
+//   new Modal({
+//     el: document.getElementById('static-modal')
+//   }).show();
+// };
+// function buttonOK() {
+//   portInput.value = portInput.value;
+//   ipInput.value = ipInput.value;
+//   localStorage.setItem('brain-dashboard', JSON.stringify({
+//     port: portInput.value,
+//     ipAddress: ipInput.value
+//   }));
+//   setTimeout(function () {
+//     location.reload();
+//   }, 300);
+// };
+
+// function logout() {
+//   localStorage.removeItem("premission");
+//   setTimeout(function () {
+//     location.reload();
+//   }, 300);
+// }
