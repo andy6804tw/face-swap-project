@@ -4,6 +4,7 @@ from flask import Flask,request,render_template
 from flask_cors import CORS
 from app.controllers.swap import swap 
 from app.controllers.upload import upload, upFile
+from app.controllers.alignment import alignment 
 from flask_uploads import configure_uploads
 
 
@@ -16,6 +17,7 @@ configure_uploads(app, upFile)
 
 app.register_blueprint(swap, url_prefix='/swap')
 app.register_blueprint(upload, url_prefix='/upload')
+app.register_blueprint(alignment, url_prefix='/alignment')
 
 
 @app.route('/test', methods=['GET'])
