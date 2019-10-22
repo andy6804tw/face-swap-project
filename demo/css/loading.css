@@ -1,110 +1,78 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
-
-html , body {
-  width: 100%;
-  height: 100%;
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
+@import url(https://fonts.googleapis.com/css?family=Quattrocento+Sans);
+ .loading {
+	 position: fixed;
+	 top: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100%;
+   background: #000;
+   opacity: .9;
+	 z-index: 9999;
 }
-
-.loading {
-  width: 100%;
-  height: 100%;
-  background: #16171d;
-  opacity: 0.9;
-  position: fixed;
-  z-index: 100;
+ .loading-text {
+	 position: absolute;
+	 top: 0;
+	 bottom: 0;
+	 left: 0;
+	 right: 0;
+	 margin: auto;
+	 text-align: center;
+	 width: 100%;
+	 height: 100px;
+	 line-height: 100px;
 }
-
-.loading > div {
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  left: 50%;
-  margin-left: -30px;
-  top: 50%;
-  margin-top: -30px;
+ .loading-text span {
+	 display: inline-block;
+	 margin: 0 5px;
+	 color: #fff;
+	 font-family: 'Quattrocento Sans', sans-serif;
 }
-
-
-.loading > div > div {
-  content: '';
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: #0f9fff;
-  top: 10px;
-  left: 10px;
-  transform-origin: 20px 20px;
-  border-radius: 8px;
-  animation: spin-a 2s infinite cubic-bezier(0.5, 0, 0.5, 1);
+ .loading-text span:nth-child(1) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0s infinite linear alternate;
 }
-
-.loading > div > .c2 {
-  top: 10px;
-  left: auto;
-  right: 10px;
-  transform-origin: -4px 20px;
-  animation: spin-b 2s infinite cubic-bezier(0.5, 0, 0.5, 1);
+ .loading-text span:nth-child(2) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0.1111111111s infinite linear alternate;
 }
-.loading > div > .c3 {
-  top: auto;
-  left: auto;
-  right: 10px;
-  bottom: 10px;
-  transform-origin: -4px -4px;
-  animation: spin-c 2s infinite cubic-bezier(0.5, 0, 0.5, 1);
+ .loading-text span:nth-child(3) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0.2222222222s infinite linear alternate;
 }
-.loading > div > .c4 {
-  top: auto;
-  bottom: 10px;
-  transform-origin: 20px -4px;
-  animation: spin-d 2s infinite cubic-bezier(0.5, 0, 0.5, 1);
+ .loading-text span:nth-child(4) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0.3333333333s infinite linear alternate;
 }
-
-@keyframes spin-a {
-  0%   { transform: rotate(90deg); }
-  0%  { transform: rotate(90deg); }
-  50%  { transform: rotate(180deg); }
-  75%  { transform: rotate(270deg); }
-  100% { transform: rotate(360deg); }
+ .loading-text span:nth-child(5) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0.4444444444s infinite linear alternate;
 }
-@keyframes spin-b {
-  0%   { transform: rotate(90deg); }
-  25%  { transform: rotate(90deg); }
-  25%  { transform: rotate(180deg); }
-  75%  { transform: rotate(270deg); }
-  100% { transform: rotate(360deg); }
+ .loading-text span:nth-child(6) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0.5555555556s infinite linear alternate;
 }
-@keyframes spin-c {
-  0%   { transform: rotate(90deg); }
-  25%  { transform: rotate(90deg); }
-  50%  { transform: rotate(180deg); }
-  50%  { transform: rotate(270deg); }
-  100% { transform: rotate(360deg); }
+ .loading-text span:nth-child(7) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0.6666666667s infinite linear alternate;
 }
-@keyframes spin-d {
-  0%   { transform: rotate(90deg); }
-  25%  { transform: rotate(90deg); }
-  50%  { transform: rotate(180deg); }
-  75%  { transform: rotate(270deg); }
-  75% { transform: rotate(360deg); }
-  100% { transform: rotate(360deg); }
+ .loading-text span:nth-child(8) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0.7777777778s infinite linear alternate;
 }
-
-
-.loading > span {
-  width: 100px;
-  height: 30px;
-  position: absolute;
-  left: 50%;
-  margin-left: -50px;
-  top: 50%;
-  margin-top: 30px;
-  color: #fff;
-  font-size: 12px;
-  text-align: center;
+ .loading-text span:nth-child(9) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 0.8888888889s infinite linear alternate;
 }
-
-.content { padding: 1.5em; }
+ .loading-text span:nth-child(10) {
+	 filter: blur(0px);
+	 animation: blur-text 1.5s 1s infinite linear alternate;
+}
+ @keyframes blur-text {
+	 0% {
+		 filter: blur(0px);
+	}
+	 100% {
+		 filter: blur(4px);
+	}
+}
+ 

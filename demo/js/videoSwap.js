@@ -51,3 +51,5 @@ const addFile = () => {
       })
   }
 }
+
+document.getElementById("loading").classList.remove("d-none");

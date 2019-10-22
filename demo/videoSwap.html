@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="./css/move-top.css">
   <link rel="stylesheet" href="./css/loading.css">
   <link rel="stylesheet" href="./css/survey.css">
+  <link rel="stylesheet" href="./css/videoSwap.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -34,13 +35,19 @@
 <body>
   <!-- Loading -->
   <div class="loading d-none" id="loading">
-    <div>
-      <div class="c1"></div>
-      <div class="c2"></div>
-      <div class="c3"></div>
-      <div class="c4"></div>
+    <div class="loading-text">
+      <span class="loading-text-words">L</span>
+      <span class="loading-text-words">O</span>
+      <span class="loading-text-words">A</span>
+      <span class="loading-text-words">D</span>
+      <span class="loading-text-words">I</span>
+      <span class="loading-text-words">N</span>
+      <span class="loading-text-words">G</span>
+      <span class="loading-text-words">.</span>
+      <span class="loading-text-words">.</span>
+      <span class="loading-text-words">.</span>
     </div>
-    <span>loading...</span>
+    <img src="./image/face-swap.gif" class="face-animate" draggable="false">
   </div>
   <!-- Loading END -->
   <div class="site-container">
@@ -98,19 +105,17 @@
               <section style="max-width: 300px">
                 <label class="label">Source Image</label>
                 <label for="file" class="input input-file">
-                  <div class="button"><input type="file" id="imageFile"
-                    accept="image/*"
-                    onchange="this.parentNode.nextSibling.value = this.files[0].name" required/>Browse
-                  </div><input type="text" readonly=""/>
+                  <div class="button"><input type="file" id="imageFile" accept="image/*"
+                      onchange="this.parentNode.nextSibling.value = this.files[0].name" required />Browse
+                  </div><input type="text" readonly="" />
                 </label>
               </section>
               <!-- EEG file zip -->
               <section style="max-width: 300px">
                 <label class="label">Transfer Video</label>
                 <label for="file" class="input input-file">
-                  <div class="button"><input type="file" id="videoFile"
-                    accept="video/*"
-                    onchange="this.parentNode.nextSibling.value = this.files[0].name" required/>Browse
+                  <div class="button"><input type="file" id="videoFile" accept="video/*"
+                      onchange="this.parentNode.nextSibling.value = this.files[0].name" required />Browse
                   </div><input type="text" readonly="" />
                 </label>
               </section>
