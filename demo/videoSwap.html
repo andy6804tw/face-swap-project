@@ -90,7 +90,7 @@
       <!-- Context 內容 -->
       <div class="container my-4">
         <section class="px-5 py-4">
-          <form class="sky-form" action="javascript:void(0);" method="post" name="dataForm">
+          <form class="sky-form" action="javascript:void(0);" method="post" name="fileForm">
             <header>Upload</header>
             <!-- Data upload -->
             <fieldset>
@@ -98,7 +98,7 @@
               <section style="max-width: 300px">
                 <label class="label">Source Image</label>
                 <label for="file" class="input input-file">
-                  <div class="button"><input type="file" id="indicatorFile"
+                  <div class="button"><input type="file" id="imageFile"
                       onchange="this.parentNode.nextSibling.value = this.files[0].name" />Browse
                   </div><input type="text" readonly="" />
                 </label>
@@ -107,14 +107,14 @@
               <section style="max-width: 300px">
                 <label class="label">Transfer Video</label>
                 <label for="file" class="input input-file">
-                  <div class="button"><input type="file" id="eegFile"
+                  <div class="button"><input type="file" id="videoFile"
                       onchange="this.parentNode.nextSibling.value = this.files[0].name" />Browse
                   </div><input type="text" readonly="" />
                 </label>
               </section>
             </fieldset>
             <footer>
-              <button type="submit" class="button" onclick="addData()">Submit</button>
+              <button type="submit" class="button" onclick="addFile()">Submit</button>
               <button type="reset" class="button button-secondary">Reset</button>
             </footer>
           </form>

@@ -7,14 +7,14 @@ upFile = UploadSet('upFile',extensions=AllExcept(()))
 
 @upload.route('', methods=['GET','POST'])
 def uploadFile():
-  if request.method == 'POST' and 'file'  in request.files:
-    request.files['file'].filename='srcVideo.'+request.files['file'].filename.split('.')[1]
-    filename = upFile.save(request.files['file'])
+  if request.method == 'POST' and 'videoFile'  in request.files:
+    request.files['videoFile'].filename='srcVideo.'+request.files['videoFile'].filename.split('.')[1]
+    filename = upFile.save(request.files['videoFile'])
     # file_url = upFile.url(filename)
     return 'don'
-  elif request.method == 'POST' and 'fileImage'  in request.files:
-    request.files['fileImage'].filename='srcImage.'+request.files['fileImage'].filename.split('.')[1]
-    filename = upFile.save(request.files['fileImage'])
+  elif request.method == 'POST' and 'imageFile'  in request.files:
+    request.files['imageFile'].filename='srcImage.'+request.files['imageFile'].filename.split('.')[1]
+    filename = upFile.save(request.files['imageFile'])
     # file_url = upFile.url(filename)
     return 'don'
   else:
