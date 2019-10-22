@@ -99,8 +99,9 @@
                 <label class="label">Source Image</label>
                 <label for="file" class="input input-file">
                   <div class="button"><input type="file" id="imageFile"
-                      onchange="this.parentNode.nextSibling.value = this.files[0].name" />Browse
-                  </div><input type="text" readonly="" />
+                    accept="image/*"
+                    onchange="this.parentNode.nextSibling.value = this.files[0].name" required/>Browse
+                  </div><input type="text" readonly=""/>
                 </label>
               </section>
               <!-- EEG file zip -->
@@ -108,7 +109,8 @@
                 <label class="label">Transfer Video</label>
                 <label for="file" class="input input-file">
                   <div class="button"><input type="file" id="videoFile"
-                      onchange="this.parentNode.nextSibling.value = this.files[0].name" />Browse
+                    accept="video/*"
+                    onchange="this.parentNode.nextSibling.value = this.files[0].name" required/>Browse
                   </div><input type="text" readonly="" />
                 </label>
               </section>
