@@ -37,6 +37,7 @@ const addFile = () => {
                 console.log(dataObject);
                 // Render result video
                 const videoPlayer = document.getElementById("videoPlayer");
+                videoPlayer.innerHTML='';
                 const source = document.createElement("source");
                 source.src = "http://localhost:5000/static/out.mp4";
                 videoPlayer.appendChild(source);
@@ -52,4 +53,3 @@ const addFile = () => {
   }
 }
 
-document.getElementById("loading").classList.remove("d-none");
