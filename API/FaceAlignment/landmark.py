@@ -1,6 +1,8 @@
 from face_alignment import FaceAlignment,LandmarksType
 import os 
 from glob import glob
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import cv2
 import numpy as np
