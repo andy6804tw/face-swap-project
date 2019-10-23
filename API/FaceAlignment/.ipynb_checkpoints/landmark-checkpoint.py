@@ -10,14 +10,16 @@ import base64
 # for display in jupyterhub
 from IPython import display
 vedio_target_path = './test_video.mp4'
-img_target_path = './test19.jpg'
+img_target_path = './Evans_test.png'
 
 
 fa = FaceAlignment(LandmarksType._2D, device='cpu')
 def plot_landmarks(frame, landmarks):
+    print('in plot')
+    print(type(frame))
 #     dpi = config.FEATURES_DPI
     dpi=100
-    fig = plt.figure(figsize=(frame.shape[1] / dpi, frame.shape[0] / dpi), dpi=dpi)
+    fig = plt.figure(figsize=(frame.shape[0] / dpi, frame.shape[1] / dpi), dpi=dpi)
     ax = fig.add_subplot(111)
     ax.axis('off')
     plt.imshow(np.ones(frame.shape))
@@ -42,6 +44,7 @@ def plot_landmarks(frame, landmarks):
     plt.close(fig)
 #     plt.show()
 #     display.clear_output(wait=True)
+    print('out plot')
     return data
 
 
@@ -57,8 +60,9 @@ def cv2_base64(image):
     base64_str = base64.b64encode(base64_str)
     return base64_str
 
-target_img = cv2.imread(img_target_path)
-res = process_img_to_lm(target_img , fa)
-# plt.imshow(np.concatenate( (target_img,res) , axis=1) )
-# plt.imshow(res)
-# print(cv2_base64(res))
+def getLandmark():
+    target_img = cv2.imread(img_target_path)[:,:,::-1]
+    res = process_img_to_lm(target_img , fa)
+    # plt.imshow(np.concatenate( (target_img,res) , axis=1) )
+    # plt.imshow(res)
+    print(cv2_base64(res))

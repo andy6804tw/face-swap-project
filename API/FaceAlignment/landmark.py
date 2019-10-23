@@ -1,21 +1,26 @@
 from face_alignment import FaceAlignment,LandmarksType
 import os 
 from glob import glob
+import matplotlib.pyplot as plt
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
-import base64
 import PIL
+import base64 
+
+# for display in jupyterhub
+from IPython import display
+vedio_target_path = './test_video.mp4'
+img_target_path = './Evans_test.png'
+# img_target_path='FaceAlignment/Evans_test.png'
 
 
-img_target_path = './test9.jpg'
 fa = FaceAlignment(LandmarksType._2D, device='cpu')
-
-# 將圖片轉成landmark
 def plot_landmarks(frame, landmarks):
+    print('in plot')
+    print(type(frame))
 #     dpi = config.FEATURES_DPI
     dpi=100
-    fig = plt.figure(figsize=(frame.shape[1] / dpi, frame.shape[0] / dpi), dpi=dpi)
+    fig = plt.figure(figsize=(frame.shape[0] / dpi, frame.shape[1] / dpi), dpi=dpi)
     ax = fig.add_subplot(111)
     ax.axis('off')
     plt.imshow(np.ones(frame.shape))
@@ -38,10 +43,11 @@ def plot_landmarks(frame, landmarks):
     fig.canvas.draw()
     data = PIL.Image.frombuffer('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb(), 'raw', 'RGB', 0, 1)
     plt.close(fig)
-    # plt.show()
+#     plt.show()
 #     display.clear_output(wait=True)
+    print('out plot')
     return data
-    return 'data'
+
 
 def process_img_to_lm(input_img , fa):
     target_img_landmark = fa.get_landmarks(input_img)[0]
@@ -55,14 +61,10 @@ def cv2_base64(image):
     base64_str = base64.b64encode(base64_str)
     return base64_str
 
-# base64 to cv2
-def base64_cv2(base64_str):
-    imgString = base64.b64decode(base64_str)
-    nparr = np.fromstring(imgString,np.uint8)  
-    image = cv2.imdecode(nparr,cv2.IMREAD_COLOR)
-    return image
-
 def getLandmark(insertValues):
-  target_img = base64_cv2(insertValues['image'])
-  res = process_img_to_lm(target_img , fa)
-  return cv2_base64(res)
+    target_img = cv2.imread(img_target_path)[:,:,::-1]
+    res = process_img_to_lm(target_img , fa)
+    # plt.imshow(np.concatenate( (target_img,res) , axis=1) )
+    # plt.imshow(res)
+    print(cv2_base64(res))
+    # return 'ddd'
