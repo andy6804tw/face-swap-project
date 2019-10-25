@@ -9,7 +9,7 @@ alignment = Blueprint('alignment',__name__)
 @alignment.route('', methods=['GET','POST'])
 def add():
   if request.method == 'GET':
-    return jsonify({'image':str(landmark.getLandmark())})
+    return jsonify({'result':str(landmark.getLandmark(''))})
   else:
     insertValues = request.get_json()
     image=insertValues['image']

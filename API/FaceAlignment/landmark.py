@@ -13,9 +13,8 @@ import time
 
 # for display in jupyterhub
 # from IPython import display
-vedio_target_path = './test_video.mp4'
 # img_target_path = './Evans_test.png'
-img_target_path='FaceAlignment/Evans_test.png'
+img_target_path='FaceAlignment/image/test11.jpg'
 
 
 fa = FaceAlignment(LandmarksType._2D, device='cpu')
@@ -45,8 +44,7 @@ def plot_landmarks(frame, landmarks):
 
     fig.canvas.draw()
     data = PIL.Image.frombuffer('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb(), 'raw', 'RGB', 0, 1)
-    # time.sleep(15)
-    # plt.close(fig)
+    # plt.close()
     plt.close()
     # plt.show()
     # display.clear_output(wait=True)
@@ -65,9 +63,19 @@ def cv2_base64(image):
     base64_str = cv2.imencode('.jpg',image)[1].tostring()
     base64_str = base64.b64encode(base64_str)
     return base64_str
+# base64 to cv2
+def base64_cv2(base64_str):
+    imgString = base64.b64decode(base64_str)
+    nparr = np.fromstring(imgString,np.uint8)  
+    image = cv2.imdecode(nparr,cv2.IMREAD_COLOR)
+    return image
 
 def getLandmark(insertValues):
-    target_img = cv2.imread(img_target_path)[:,:,::-1]
+    # Read images
+    if insertValues=='':
+        target_img = cv2.imread(img_target_path)[:,:,::-1]
+    else:
+        target_img = base64_cv2(insertValues['image'])
     res = process_img_to_lm(target_img , fa)
     # plt.imshow(np.concatenate( (target_img,res) , axis=1) )
     # plt.imshow(res)
