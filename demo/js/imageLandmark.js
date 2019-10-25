@@ -18,6 +18,8 @@ const postImage = async () => {
       var dataObject = response.data;
       // POST success
       const responseImg = dataObject.result.split("'")[1];
+      const srcImg=dataObject.image;
+      document.getElementById('imgSrc').src=`data:image/jpeg;base64,${srcImg}`;
       document.getElementById('imgRes').src = `data:image/jpeg;base64,${responseImg}`;
         document.getElementById("loading").classList.add("d-none");
     },
