@@ -1,5 +1,6 @@
 from flask import Blueprint, request,jsonify,redirect
 import FaceAlignment.landmark as landmark
+import FaceAlignment.videoLandmark as videoLandmark
 
 
 
@@ -14,3 +15,13 @@ def add():
     insertValues = request.get_json()
     image=insertValues['image']
     return jsonify({'result':str(landmark.getLandmark(insertValues)),'image':image})
+
+
+@alignment.route('/landmark/video', methods=['GET','POST'])
+def video():
+  if request.method == 'GET':
+    return jsonify({'result':str(videoLandmark.getVideoLandmark(''))})
+  else:
+    insertValues = request.get_json()
+    image=insertValues['image']
+    return jsonify({'result':str(videoLandmark.getVideoLandmark(insertValues)),'image':image})

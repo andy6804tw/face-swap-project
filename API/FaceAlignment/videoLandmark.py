@@ -13,7 +13,7 @@ import time
 
 # for display in jupyterhub
 # from IPython import display
-vedio_target_path='FaceAlignment/test_video.mp4'
+vedio_target_path='FaceAlignment/test_video2.mp4'
 # img_target_path = './Evans_test.png'
 img_target_path='FaceAlignment/image/test11.jpg'
 
@@ -84,9 +84,11 @@ def frame_to_film(img_list , video_write_path ,fps):
     frame = img_list[0]
     height, width, channel = frame.shape
     
-    video = cv2.VideoWriter(video_write_path, cv2.VideoWriter_fourcc(*'DIVX'), fps , (width,height))
+    # video = cv2.VideoWriter(video_write_path, cv2.VideoWriter_fourcc(*'DIVX'), fps , (width,height))
+    video = cv2.VideoWriter(video_write_path, cv2.VideoWriter_fourcc('a', 'v', 'c', '1'), fps , (width,height))
     for i in range(len(img_list)):        
-        video.write(img_list[i][:,:,::-1])   
+        video.write(img_list[i][:,:,::-1])  
+    cv2.destroyAllWindows() 
     video.release()
 
 def getVideoLandmark(insertValues):
@@ -97,5 +99,5 @@ def getVideoLandmark(insertValues):
         lm_list.append(process_img_to_lm(image,fa))
     lm_list = np.array(lm_list)
      ## 將landmark轉成影片
-    frame_to_film(lm_list,'./testing.mp4',fps)
-    return 'cv2_base64(res)'
+    frame_to_film(lm_list,'FaceAlignment/testing.mp4',fps)
+    return 'success'
