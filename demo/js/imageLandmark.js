@@ -1,5 +1,5 @@
 
-const imgSource = document.getElementById("img_source");
+const imgSource = document.getElementById("imgSource");
 
 const toBase64 = file => new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -17,9 +17,8 @@ const postImage = async () => {
     .then((response) => {
       var dataObject = response.data;
       // POST success
-    //   const responseImg = dataObject.result.split("'")[1];
-    //   document.getElementById('image').src = `data:image/jpeg;base64,${dataObject.image1}`;
-        console.log(dataObject)
+      const responseImg = dataObject.result.split("'")[1];
+      document.getElementById('imgRes').src = `data:image/jpeg;base64,${responseImg}`;
         document.getElementById("loading").classList.add("d-none");
     },
       (error) => {

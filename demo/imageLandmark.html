@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="./css/move-top.css">
   <link rel="stylesheet" href="./css/loading.css">
   <link rel="stylesheet" href="./css/survey.css">
+  <link rel="stylesheet" href="./css/imageLandmark.css">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 </head>
@@ -100,7 +101,7 @@
               <section style="max-width: 300px">
                 <label class="label">Source Image</label>
                 <label for="file" class="input input-file">
-                  <div class="button"><input type="file" id="img_source" accept="image/*"
+                  <div class="button"><input type="file" id="imgSource" accept="image/*"
                       onchange="this.parentNode.nextSibling.value = this.files[0].name" required />Browse
                   </div><input type="text" readonly="" />
                 </label>
@@ -116,7 +117,7 @@
           <!-- <video id="videoPlayer" class="d-none" width="720" controls>
           </video> -->
           <div class="resImage">
-
+            <img id="imgRes" src="/demo/image/landmark.jpeg" alt="">
           </div>
         </section>
 
