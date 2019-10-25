@@ -6,7 +6,7 @@ import FaceAlignment.landmark as landmark
 alignment = Blueprint('alignment',__name__)
   
 
-@alignment.route('', methods=['GET','POST'])
+@alignment.route('/landmark', methods=['GET','POST'])
 def add():
   if request.method == 'GET':
     return jsonify({'result':str(landmark.getLandmark(''))})
