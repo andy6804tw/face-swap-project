@@ -1,4 +1,6 @@
 import landmark as landmark
 
 if __name__ == '__main__':
-    landmark.getLandmark('fff')
+    ca=landmark.FaceLandmark()
+    ca.getLandmark('fff')
+    # landmark.getLandmark('fff')

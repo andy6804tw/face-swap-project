@@ -19,7 +19,6 @@ app.register_blueprint(swap, url_prefix='/swap')
 app.register_blueprint(upload, url_prefix='/upload')
 app.register_blueprint(alignment, url_prefix='/alignment')
 
-
 @app.route('/test', methods=['GET'])
 def home():
     return "<h1>Hello Flask!</h1>"

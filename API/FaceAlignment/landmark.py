@@ -1,23 +1,26 @@
 from face_alignment import FaceAlignment,LandmarksType
 import os 
 from glob import glob
+import matplotlib
+# matplotlib.use('TkAgg')
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 import PIL
 import base64 
+import time
 
 # for display in jupyterhub
-from IPython import display
+# from IPython import display
 vedio_target_path = './test_video.mp4'
-img_target_path = './Evans_test.png'
-# img_target_path='FaceAlignment/Evans_test.png'
+# img_target_path = './Evans_test.png'
+img_target_path='FaceAlignment/Evans_test.png'
 
 
 fa = FaceAlignment(LandmarksType._2D, device='cpu')
 def plot_landmarks(frame, landmarks):
     print('in plot')
-    print(type(frame))
 #     dpi = config.FEATURES_DPI
     dpi=100
     fig = plt.figure(figsize=(frame.shape[0] / dpi, frame.shape[1] / dpi), dpi=dpi)
@@ -42,9 +45,11 @@ def plot_landmarks(frame, landmarks):
 
     fig.canvas.draw()
     data = PIL.Image.frombuffer('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb(), 'raw', 'RGB', 0, 1)
-    plt.close(fig)
-#     plt.show()
-#     display.clear_output(wait=True)
+    # time.sleep(15)
+    # plt.close(fig)
+    plt.close()
+    # plt.show()
+    # display.clear_output(wait=True)
     print('out plot')
     return data
 
@@ -66,5 +71,4 @@ def getLandmark(insertValues):
     res = process_img_to_lm(target_img , fa)
     # plt.imshow(np.concatenate( (target_img,res) , axis=1) )
     # plt.imshow(res)
-    print(cv2_base64(res))
-    # return 'ddd'
+    return cv2_base64(res)

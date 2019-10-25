@@ -8,5 +8,4 @@ OPENCV_OBJECT_TRACKERS = {
     "tld": cv2.TrackerTLD_create,
     "medianflow": cv2.TrackerMedianFlow_create,
     "mosse": cv2.TrackerMOSSE_create
-    
 }
