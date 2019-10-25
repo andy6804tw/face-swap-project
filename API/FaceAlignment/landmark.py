@@ -2,12 +2,8 @@ from face_alignment import FaceAlignment,LandmarksType
 import os 
 from glob import glob
 import matplotlib
-<<<<<<< HEAD
 # matplotlib.use('TkAgg')
 matplotlib.use('agg')
-=======
-matplotlib.use('TkAgg')
->>>>>>> c0c021c6c7eee77d5737a2530541d5afeae86da9
 import matplotlib.pyplot as plt
 import cv2
 import numpy as np
@@ -51,11 +47,7 @@ def plot_landmarks(frame, landmarks):
     data = PIL.Image.frombuffer('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb(), 'raw', 'RGB', 0, 1)
     # time.sleep(15)
     # plt.close(fig)
-<<<<<<< HEAD
     plt.close()
-=======
-    plt.close('all')
->>>>>>> c0c021c6c7eee77d5737a2530541d5afeae86da9
     # plt.show()
     # display.clear_output(wait=True)
     print('out plot')
