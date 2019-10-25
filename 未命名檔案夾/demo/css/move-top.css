@@ -1,0 +1,50 @@
+/* back to top */
+#back-top {
+	position:fixed;
+	bottom:50px;
+	right:2%;
+	z-index:1000;
+}
+#back-top span {
+	width:40px;
+	height:40px;
+	display:block;
+	margin-bottom:7px;
+	background:#333 url(../image/up-arrow.png) no-repeat center center;
+	-webkit-border-radius:10%;
+	-moz-border-radius:10%;
+	border-radius:10%;
+	-webkit-transition:1s;
+	-moz-transition:1s;
+	transition:1s;
+}
+#back-top a:hover span {
+	opacity:.7;
+}
+#back-top a {
+	width:44px;
+	display:block;
+	text-align:center;
+	font:11px/100% Arial,Helvetica,sans-serif;
+	text-transform:uppercase;
+	text-decoration:none;
+	color:#666;
+	-webkit-transition:1s;
+	-moz-transition:1s;
+	transition:1s;
+}
+.cd-top{
+  visibility:hidden;
+  opacity:0;
+  transition:opacity .3s, visibility .3s, background-color .3s
+}
+.cd-top--is-visible{
+  visibility:visible;
+  opacity:1
+}
+.cd-top--fade-out{
+  opacity:.4
+}
+.cd-top--fade-out:hover{
+  opacity:1
+}

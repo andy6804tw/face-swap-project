@@ -1,0 +1,146 @@
+/* All thanks to this great article by Keith Clark: https://keithclark.co.uk/articles/pure-css-parallax-websites */
+/* You might also be interested in his follow-up: https://keithclark.co.uk/articles/practical-css-parallax */
+// Go through his descriptions to understand the basics.
+// You can really spice things up by using css custom properties and calc().
+// Mostly for adding layer structure like very deep behind or in front of base like described in the article. I had this done here and it worked pure awesome but most people will just need a background and a base layer.
+
+// The most necessary stuff
+// =====================================================
+#parallax__wrapper
+  perspective: 1px
+  height: 100vh
+  overflow-x: hidden
+  overflow-y: auto
+
+.parallax__group
+  position: relative
+  height: 105vh
+  transform-style: preserve-3d
+
+[class^='parallax__layer']
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+
+.parallax__layer__back
+  transform: translateZ(-1px) scale(2.1)
+
+// Stylings to make the perspective actually perceptible
+// =====================================================
+/* The stacking order of the groups (or sections) depends on your layout.
+   You might want to reverse it here to see what overlaps what. */
+.parallax__group:nth-child(odd)
+  z-index: 1
+.parallax__group:nth-child(even)
+  z-index: 2
+  // margin-left: 20vw /* Uncomment to have some visual hints */
+
+header .parallax__layer__back
+  background-image: url('https://goo.gl/KpR86D')
+
+section:nth-of-type(odd) .parallax__layer__base
+  background-color: white
+
+section:nth-of-type(2) .parallax__layer__back
+  background-image: url('https://goo.gl/fok2Gx')
+
+section:nth-of-type(4) .parallax__layer__back
+  background-image: url('https://goo.gl/3nG07C')
+
+  
+  
+  
+// Design stylings, absolutely not needed for the effect to work
+// =====================================================
+header,
+section:nth-of-type(even) .parallax__layer__base
+  color: white
+
+footer,
+[class^='parallax__layer']
+  display: table
+  width: 100%
+  height: 100%
+  background-size: cover !important
+  background-position: center !important
+
+.contain
+  display: table-cell
+  vertical-align: middle
+  text-align: center
+  font-size: calc(1vw + 1vh + .75vmin)
+
+header .parallax__layer__back,
+section:nth-of-type(4) .parallax__layer__back,
+  filter: grayscale(80%)
+  background-color: royalblue
+  background-blend-mode: overlay
+
+section:nth-of-type(2) .parallax__layer__back
+  filter: grayscale(70%)
+  background-color: tomato
+  background-blend-mode: overlay
+  
+section:nth-of-type(1)
+  color: hsl(230, 30%, 40)
+  
+section:nth-of-type(3)
+  color: hsl(360, 30%, 50)
+
+header h1, header button
+  text-shadow: 0 0 20px hsla(230, 30%, 40, .7)
+
+nav
+  position: absolute
+  top: 0
+  background: none
+  z-index: 3
+  width: 100%
+  text-align: right
+  padding-top: 2px
+  a
+    line-height: 3
+    color: white
+    font-size: calc(1vw + 1vh + .75vmin)
+    margin-right: 1em
+    text-decoration: none
+    transition: opacity .3s
+    &:hover
+      opacity: .5
+  
+button
+  background: none
+  border: solid 2px white
+  border-radius: 5px
+  padding: 1em 3em
+  margin-top: 1em
+  color: white
+  text-transform: capitalize
+  cursor: pointer
+  transition: all .3s
+  &:hover
+    background: white
+    color: hsl(230, 30%, 30)
+    text-shadow: none
+
+footer
+  display: table
+  width: 100%
+  background-color: hsl(230, 30%, 30)
+  h1
+    font-size: 100%
+    color: white
+  &:after
+    content: ''
+    display: block
+    position: absolute
+    bottom: -1px
+    left: 0
+    background: hsl(230, 30%, 30)
+    height: 1px
+    width: 100%
+    
+#parallax__wrapper
+  scroll-behavior: smooth
