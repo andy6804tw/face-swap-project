@@ -22,7 +22,7 @@ def plot_landmarks(frame, landmarks):
     print('in plot')
 #     dpi = config.FEATURES_DPI
     dpi=100
-    fig = plt.figure(figsize=(frame.shape[0] / dpi, frame.shape[1] / dpi), dpi=dpi)
+    fig = plt.figure(figsize=(frame.shape[1] / dpi, frame.shape[0] / dpi), dpi=dpi)
     ax = fig.add_subplot(111)
     ax.axis('off')
     plt.imshow(np.ones(frame.shape))

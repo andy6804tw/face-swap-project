@@ -21,7 +21,6 @@ vedio_target_path='FaceAlignment/test.mov'
 
 fa = FaceAlignment(LandmarksType._2D, device='cpu')
 def plot_landmarks(frame, landmarks):
-    print('in plot')
 #     dpi = config.FEATURES_DPI
     dpi=100
     fig = plt.figure(figsize=(frame.shape[1] / dpi, frame.shape[0] / dpi), dpi=dpi)
@@ -49,7 +48,7 @@ def plot_landmarks(frame, landmarks):
     # plt.close()
     # plt.show()
     # display.clear_output(wait=True)
-    print('out plot')
+    print('done')
     return data
 
 
