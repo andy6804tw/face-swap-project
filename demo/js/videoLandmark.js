@@ -17,27 +17,27 @@ const addFile = () => {
         .then(function (response) {
           var dataObject = response.data;
           console.log(dataObject);
-        //   axios.get(`http://localhost:5000/swap/video`)
-        //     .then((response) => {
-        //       const dataObject = response.data;
-        //       console.log(dataObject);
-        //       // Render result video
-        //       const videoPlayer = document.getElementById("videoPlayer");
-        //       videoPlayer.innerHTML = '';
-        //       videoPlayer.classList.remove("d-none");
-        //       const player = videojs('videoPlayer', {
-        //         sources: [{ src: `http://localhost:5000/static/${dataObject.token}-out.mp4` }],
-        //         loop: false,
-        //         autoplay: 'muted',
-        //         width: "720",
-        //         controls: true
-        //       });
-        //       document.getElementById("loading").classList.add("d-none");
-        //     },
-        //       (error) => {
-        //         var message = error.response.data.message;
-        //       }
-        //     );
+          axios.get(`http://localhost:5000/alignment/landmark/video`)
+            .then((response) => {
+              const dataObject = response.data;
+              console.log(dataObject);
+              // Render result video
+              const videoPlayer = document.getElementById("videoPlayer");
+              videoPlayer.innerHTML = '';
+              videoPlayer.classList.remove("d-none");
+              const player = videojs('videoPlayer', {
+                sources: [{ src: `http://localhost:5000/static/${dataObject.token}-out.mp4` }],
+                loop: false,
+                autoplay: 'muted',
+                height: "350",
+                controls: true
+              });
+              document.getElementById("loading").classList.add("d-none");
+            },
+              (error) => {
+                var message = error.response.data.message;
+              }
+            );
         })
     }
   }

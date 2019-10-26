@@ -20,8 +20,6 @@ def add():
 @alignment.route('/landmark/video', methods=['GET','POST'])
 def video():
   if request.method == 'GET':
-    return jsonify({'result':str(videoLandmark.getVideoLandmark(''))})
+    return videoLandmark.getVideoLandmark()
   else:
-    insertValues = request.get_json()
-    image=insertValues['image']
-    return jsonify({'result':str(videoLandmark.getVideoLandmark(insertValues)),'image':image})
+    return videoLandmark.getVideoLandmark()

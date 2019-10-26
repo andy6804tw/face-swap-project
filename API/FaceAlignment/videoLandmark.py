@@ -1,6 +1,6 @@
 from face_alignment import FaceAlignment,LandmarksType
-import os 
 from glob import glob
+from flask import jsonify
 import matplotlib
 # matplotlib.use('TkAgg')
 matplotlib.use('agg')
@@ -9,12 +9,14 @@ import cv2
 import numpy as np
 import PIL
 import base64 
-np.set_printoptions(threshold=np.inf)
+import time
+import os 
 
 # for display in jupyterhub
 # from IPython import display
 # vedio_target_path='./test_video.mp4'
-vedio_target_path='FaceAlignment/test.mov'
+# vedio_target_path='FaceAlignment/test.mov'
+vedio_target_path='app/static/srcVideo.mp4'
 # img_target_path = './Evans_test.png'
 # img_target_path='FaceAlignment/image/test11.jpg'
 
@@ -89,14 +91,16 @@ def frame_to_film(img_list , video_write_path ,fps):
     video.release()
     
 
-def getVideoLandmark(insertValues):
+def getVideoLandmark():
     # Read images
     imgs , fps = extract_frame(vedio_target_path)
     print(len(imgs))
     lm_list=[]
-    for image in imgs[0:1]:
+    for image in imgs:
         lm_list.append(process_img_to_lm(image,fa))
     lm_list = np.array(lm_list)
      # 將landmark轉成影片
-    frame_to_film(lm_list,'FaceAlignment/testing.mp4',fps)
-    return 'success'
+    # frame_to_film(lm_list,'FaceAlignment/testing.mp4',fps)
+    ts = int(time.time())
+    frame_to_film(lm_list,'app/static/'+str(ts)+'-out.mp4',fps)
+    return jsonify({'result':200,'token':str(ts)})
