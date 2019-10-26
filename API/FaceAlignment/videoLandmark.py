@@ -9,13 +9,14 @@ import cv2
 import numpy as np
 import PIL
 import base64 
-import time
+np.set_printoptions(threshold=np.inf)
 
 # for display in jupyterhub
 # from IPython import display
-vedio_target_path='FaceAlignment/test_video2.mp4'
+# vedio_target_path='./test_video.mp4'
+vedio_target_path='FaceAlignment/test.mov'
 # img_target_path = './Evans_test.png'
-img_target_path='FaceAlignment/image/test11.jpg'
+# img_target_path='FaceAlignment/image/test11.jpg'
 
 
 fa = FaceAlignment(LandmarksType._2D, device='cpu')
@@ -23,7 +24,7 @@ def plot_landmarks(frame, landmarks):
     print('in plot')
 #     dpi = config.FEATURES_DPI
     dpi=100
-    fig = plt.figure(figsize=(frame.shape[0] / dpi, frame.shape[1] / dpi), dpi=dpi)
+    fig = plt.figure(figsize=(frame.shape[1] / dpi, frame.shape[0] / dpi), dpi=dpi)
     ax = fig.add_subplot(111)
     ax.axis('off')
     plt.imshow(np.ones(frame.shape))
@@ -46,7 +47,6 @@ def plot_landmarks(frame, landmarks):
     fig.canvas.draw()
     data = PIL.Image.frombuffer('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb(), 'raw', 'RGB', 0, 1)
     # plt.close()
-    plt.close()
     # plt.show()
     # display.clear_output(wait=True)
     print('out plot')
@@ -83,21 +83,21 @@ def extract_frame(video):
 def frame_to_film(img_list , video_write_path ,fps):
     frame = img_list[0]
     height, width, channel = frame.shape
-    
     # video = cv2.VideoWriter(video_write_path, cv2.VideoWriter_fourcc(*'DIVX'), fps , (width,height))
     video = cv2.VideoWriter(video_write_path, cv2.VideoWriter_fourcc('a', 'v', 'c', '1'), fps , (width,height))
     for i in range(len(img_list)):        
-        video.write(img_list[i][:,:,::-1])  
-    cv2.destroyAllWindows() 
+        video.write(img_list[i][:,:,::-1])   
     video.release()
+    
 
 def getVideoLandmark(insertValues):
     # Read images
     imgs , fps = extract_frame(vedio_target_path)
+    print(len(imgs))
     lm_list=[]
-    for image in imgs:
+    for image in imgs[0:1]:
         lm_list.append(process_img_to_lm(image,fa))
     lm_list = np.array(lm_list)
-     ## 將landmark轉成影片
+     # 將landmark轉成影片
     frame_to_film(lm_list,'FaceAlignment/testing.mp4',fps)
     return 'success'
