@@ -126,11 +126,11 @@ def i2iSwap(insertValues):
 
     # print(output)
 
-    dir_path = os.path.dirname('FaceSwap/results/myOut.jpg')
-    if not os.path.isdir(dir_path):
-        os.makedirs(dir_path)
+    # dir_path = os.path.dirname('FaceSwap/results/myOut.jpg')
+    # if not os.path.isdir(dir_path):
+    #     os.makedirs(dir_path)
 
-    cv2.imwrite('FaceSwap/results/myOut.jpg', output)
+    # cv2.imwrite('FaceSwap/results/myOut.jpg', output)
     return cv2_base64(output)
 
 def test():
