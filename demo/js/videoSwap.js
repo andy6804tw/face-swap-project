@@ -19,11 +19,15 @@ const addFile = () => {
         var dataObject = response.data;
         console.log(dataObject);
         const formData = new FormData();
-        if (vildeoFile.length)
+        console.log(vildeoFile[0].name);
+        if (vildeoFile.length){
           formData.append("videoFile", vildeoFile[0]);
+          formData.append("fileName", `srcVideo.${vildeoFile[0].name.split('.')[0]}`);
+        }
         else {
           const recordFile = new File([recordedBlob], "webm");
           formData.append("videoFile", recordFile);
+          formData.append("fileName", 'srcVideo.webm');
         }
         document.getElementById("loading").classList.remove("d-none");
         axios.post(`http://127.0.0.1:5000/upload`, formData,

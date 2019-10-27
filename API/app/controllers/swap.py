@@ -18,9 +18,10 @@ def add():
     image2=insertValues['image2']
     return jsonify({'result':str(imageSwap.i2iSwap(insertValues)),'image1':image1,'image2':image2})
 
-@swap.route('/video')
+@swap.route('/video', methods=['POST'])
 def video():
-  result=videoSwap.i2vSwap()
+  videoName=request.get_json()['videoName']
+  result=videoSwap.i2vSwap(videoName)
   return  result
 
 @swap.route('/show')

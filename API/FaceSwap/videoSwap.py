@@ -279,7 +279,7 @@ Cancel the selection process by pressing c button!''')
         return img
 
 
-def i2vSwap():
+def i2vSwap(videoName):
     # logging.basicConfig(level=logging.INFO,
     #                     format="%(levelname)s:%(lineno)d:%(message)s")
 
@@ -290,7 +290,7 @@ def i2vSwap():
     #                     help='Path for video')
     # args = parser.parse_args()
     # video_path = args.video_path
-    test = VideoHandler('app/static/srcVideo.webm')
+    test = VideoHandler('app/static/'+videoName)
     test.set_src_img('app/static/srcImage.jpg')
     processResult=test.process_src_img()
     if(processResult):
