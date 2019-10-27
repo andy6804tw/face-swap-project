@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="./css/loading.css">
   <link rel="stylesheet" href="./css/survey.css">
   <link rel="stylesheet" href="./css/videoSwap.css">
+  <link rel="stylesheet" href="./css/recorder.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
   <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -120,6 +121,28 @@
                       onchange="this.parentNode.nextSibling.value = this.files[0].name" required />Browse
                   </div><input type="text" readonly="" />
                 </label>
+              </section>
+            </fieldset>
+            <fieldset>
+              <section>
+                  <div class="left">
+                      <div id="startButton" class="button">
+                        Start
+                      </div>
+                      <h4>Preview</h4>
+                      <video id="preview" width="160" height="120" autoplay muted></video>
+                    </div>
+                    <div class="right">
+                      <div id="stopButton" class="button">
+                        Stop
+                      </div>
+                      <h4>Recording</h4>
+                      <video id="recording" width="160" height="120" controls></video>
+                      <a id="downloadButton" class="button">
+                        Download
+                      </a>
+                      <a onclick="upload()">upload</a>
+                    </div>
               </section>
             </fieldset>
             <footer>

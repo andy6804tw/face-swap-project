@@ -1,0 +1,30 @@
+video {
+  margin-top: 2px;
+  border: 1px solid black;
+}
+
+.left .button,.right .button {
+  cursor: pointer;
+  display: block;
+  width: 160px;
+  border: 1px solid black;
+  font-size: 10px;
+  text-align: center;
+  color: white;
+  background-color: darkgreen;
+  text-decoration: none;
+}
+
+.left {
+  margin-right: 10px;
+  float: left;
+  width: 160px;
+  padding: 0px;
+}
+
+.right {
+  margin-left: 10px;
+  float: left;
+  width: 160px;
+  padding: 0px;
+}
