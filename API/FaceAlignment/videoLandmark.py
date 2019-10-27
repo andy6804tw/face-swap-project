@@ -50,7 +50,6 @@ def plot_landmarks(frame, landmarks):
     plt.close()
     # plt.show()
     # display.clear_output(wait=True)
-    print('done')
     return data
 
 
@@ -96,8 +95,9 @@ def getVideoLandmark():
     imgs , fps = extract_frame(vedio_target_path)
     print(len(imgs))
     lm_list=[]
-    for image in imgs:
+    for index,image in  enumerate(imgs):
         lm_list.append(process_img_to_lm(image,fa))
+        print(index,'done')
     lm_list = np.array(lm_list)
      # 將landmark轉成影片
     # frame_to_film(lm_list,'FaceAlignment/testing.mp4',fps)
