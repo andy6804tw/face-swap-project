@@ -290,7 +290,7 @@ def i2vSwap():
     #                     help='Path for video')
     # args = parser.parse_args()
     # video_path = args.video_path
-    test = VideoHandler('app/static/srcVideo.mov')
+    test = VideoHandler('app/static/srcVideo.webm')
     test.set_src_img('app/static/srcImage.jpg')
     processResult=test.process_src_img()
     if(processResult):

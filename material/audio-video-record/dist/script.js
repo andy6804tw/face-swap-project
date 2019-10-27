@@ -4,6 +4,7 @@ let startButton = document.getElementById("startButton");
 let stopButton = document.getElementById("stopButton");
 let downloadButton = document.getElementById("downloadButton");
 let logElement = document.getElementById("log");
+let recordedBlob;
 
 let recordingTimeMS = 5000;
 function log(msg) {
@@ -49,7 +50,8 @@ startButton.addEventListener("click", function() {
     return new Promise(resolve => preview.onplaying = resolve);
   }).then(() => startRecording(preview.captureStream(), recordingTimeMS))
   .then (recordedChunks => {
-    let recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
+    console.log('stop');
+    recordedBlob = new Blob(recordedChunks, { type: "video/webm" });
     recording.src = URL.createObjectURL(recordedBlob);
     downloadButton.href = recording.src;
     downloadButton.download = "RecordedVideo.webm";
@@ -58,6 +60,25 @@ startButton.addEventListener("click", function() {
         recordedBlob.type + " media.");
   })
   .catch(log);
-}, false);stopButton.addEventListener("click", function() {
+}, false);
+stopButton.addEventListener("click", function() {
   stop(preview.srcObject);
 }, false);
+
+
+const upload=()=>{
+  // 上傳 Video 檔案
+  const recordFile = new File([recordedBlob], "webm");
+  const formData = new FormData();
+  formData.append("videoFile", recordFile);
+  axios.post(`http://127.0.0.1:5000/upload`, formData,
+    {
+      headers: {
+        'content-type': 'mutipart/form-data'
+      }
+    })
+    .then(function (response) {
+      var dataObject = response.data;
+      console.log(dataObject);
+    })
+}

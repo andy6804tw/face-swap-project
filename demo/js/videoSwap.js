@@ -7,7 +7,9 @@ const addFile = () => {
     document.getElementById("loading").classList.remove("d-none");
     // 上傳 Image 檔案
     const formData = new FormData();
+    console.log(typeof(imageFile[0]))
     formData.append("imageFile", imageFile[0]);
+    console.log(formData)
     document.getElementById("loading").classList.remove("d-none");
     axios.post(`http://127.0.0.1:5000/upload`, formData,
       {
