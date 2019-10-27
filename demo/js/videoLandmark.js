@@ -7,7 +7,7 @@ const addFile = () => {
       // 上傳 Image 檔案
       const formData = new FormData();
       formData.append("videoFile", vildeoFile[0]);
-      formData.append("fileName", 'srcVideo.webm');
+      formData.append("fileName", 'srcVideo.mp4');
       document.getElementById("loading").classList.remove("d-none");
       axios.post(`http://127.0.0.1:5000/upload`, formData,
         {
@@ -27,10 +27,10 @@ const addFile = () => {
               videoPlayerSrc.innerHTML = '';
               videoPlayerSrc.classList.remove("d-none");
               const playerSrc = videojs('videoPlayer-src', {
-                sources: [{ src: `http://localhost:5000/static/srcVideo.webm` }],
+                sources: [{ src: `http://localhost:5000/static/srcVideo.mp4` }],
                 loop: false,
                 autoplay: 'muted',
-                // height: "350",
+                // width: "720",
                 controls: true
               });
               // Render result video
@@ -41,7 +41,7 @@ const addFile = () => {
                 sources: [{ src: `http://localhost:5000/static/${dataObject.token}-out.mp4` }],
                 loop: false,
                 autoplay: 'muted',
-                // height: "350",
+                // width: "720",
                 controls: true
               });
               document.getElementById("loading").classList.add("d-none");

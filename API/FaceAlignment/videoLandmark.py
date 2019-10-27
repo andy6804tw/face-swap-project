@@ -16,14 +16,13 @@ import os
 # from IPython import display
 # vedio_target_path='./test_video.mp4'
 # vedio_target_path='FaceAlignment/test.mov'
-vedio_target_path='app/static/srcVideo.webm'
+vedio_target_path='app/static/srcVideo.mp4'
 # img_target_path = './Evans_test.png'
 # img_target_path='FaceAlignment/image/test11.jpg'
 
 
 fa = FaceAlignment(LandmarksType._2D, device='cpu')
 def plot_landmarks(frame, landmarks):
-#     dpi = config.FEATURES_DPI
     dpi=100
     fig = plt.figure(figsize=(frame.shape[1] / dpi, frame.shape[0] / dpi), dpi=dpi)
     ax = fig.add_subplot(111)
@@ -112,7 +111,7 @@ def getVideoLandmark():
     imgs , fps = extract_frame_webm(vedio_target_path)
     print(len(imgs))
     lm_list=[]
-    for index,image in  enumerate(imgs):
+    for index,image in  enumerate(imgs[0:1]):
         lm_list.append(process_img_to_lm(image,fa))
         print(index,'done')
     lm_list = np.array(lm_list)
