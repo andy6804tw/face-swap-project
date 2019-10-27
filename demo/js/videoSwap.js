@@ -3,13 +3,11 @@ const addFile = () => {
   // File
   const imageFile = document.getElementById('imageFile').files;
   const vildeoFile = document.getElementById('videoFile').files;
-  if (imageFile.length && vildeoFile.length) {
+  if (imageFile.length) {
     document.getElementById("loading").classList.remove("d-none");
     // 上傳 Image 檔案
     const formData = new FormData();
-    console.log(typeof(imageFile[0]))
     formData.append("imageFile", imageFile[0]);
-    console.log(formData)
     document.getElementById("loading").classList.remove("d-none");
     axios.post(`http://127.0.0.1:5000/upload`, formData,
       {
@@ -20,9 +18,13 @@ const addFile = () => {
       .then(function (response) {
         var dataObject = response.data;
         console.log(dataObject);
-        // 上傳 Image 檔案
         const formData = new FormData();
-        formData.append("videoFile", vildeoFile[0]);
+        if (vildeoFile.length)
+          formData.append("videoFile", vildeoFile[0]);
+        else {
+          const recordFile = new File([recordedBlob], "webm");
+          formData.append("videoFile", recordFile);
+        }
         document.getElementById("loading").classList.remove("d-none");
         axios.post(`http://127.0.0.1:5000/upload`, formData,
           {
