@@ -21,15 +21,26 @@ const addFile = () => {
             .then((response) => {
               const dataObject = response.data;
               console.log(dataObject);
+              // Render source video
+              const videoPlayerSrc = document.getElementById("videoPlayer-src");
+              videoPlayerSrc.innerHTML = '';
+              videoPlayerSrc.classList.remove("d-none");
+              const playerSrc = videojs('videoPlayer-src', {
+                sources: [{ src: `http://localhost:5000/static/srcVideo.mov` }],
+                loop: false,
+                autoplay: 'muted',
+                // height: "350",
+                controls: true
+              });
               // Render result video
-              const videoPlayer = document.getElementById("videoPlayer");
-              videoPlayer.innerHTML = '';
-              videoPlayer.classList.remove("d-none");
-              const player = videojs('videoPlayer', {
+              const videoPlayerRes = document.getElementById("videoPlayer-res");
+              videoPlayerRes.innerHTML = '';
+              videoPlayerRes.classList.remove("d-none");
+              const playerRes = videojs('videoPlayer-res', {
                 sources: [{ src: `http://localhost:5000/static/${dataObject.token}-out.mp4` }],
                 loop: false,
                 autoplay: 'muted',
-                height: "350",
+                // height: "350",
                 controls: true
               });
               document.getElementById("loading").classList.add("d-none");
