@@ -16,7 +16,7 @@ import os
 # from IPython import display
 # vedio_target_path='./test_video.mp4'
 # vedio_target_path='FaceAlignment/test.mov'
-vedio_target_path='app/static/srcVideo.mov'
+vedio_target_path='app/static/srcVideo.webm'
 # img_target_path = './Evans_test.png'
 # img_target_path='FaceAlignment/image/test11.jpg'
 
@@ -27,10 +27,8 @@ def plot_landmarks(frame, landmarks):
     dpi=100
     fig = plt.figure(figsize=(frame.shape[1] / dpi, frame.shape[0] / dpi), dpi=dpi)
     ax = fig.add_subplot(111)
-    ax.axis('off')
     plt.imshow(np.ones(frame.shape))
     plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
-
     # Head
     ax.plot(landmarks[0:17, 0], landmarks[0:17, 1], linestyle='-', color='green', lw=2)
     # Eyebrows
@@ -44,7 +42,6 @@ def plot_landmarks(frame, landmarks):
     ax.plot(landmarks[42:48, 0], landmarks[42:48, 1], linestyle='-', color='red', lw=2)
     # Mouth
     ax.plot(landmarks[48:60, 0], landmarks[48:60, 1], linestyle='-', color='purple', lw=2)
-
     fig.canvas.draw()
     data = PIL.Image.frombuffer('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb(), 'raw', 'RGB', 0, 1)
     plt.close()
@@ -54,10 +51,14 @@ def plot_landmarks(frame, landmarks):
 
 
 def process_img_to_lm(input_img , fa):
-    target_img_landmark = fa.get_landmarks(input_img)[0]
-    target_img_lm = plot_landmarks(input_img,target_img_landmark)
-    target_img_lm = np.array(target_img_lm)
-    return target_img_lm
+    target_img_landmark = fa.get_landmarks(input_img)
+    if target_img_landmark:
+        target_img_lm = plot_landmarks(input_img,target_img_landmark[0])
+        target_img_lm = np.array(target_img_lm)
+        return target_img_lm
+    else:
+        return 255 * np.ones(input_img.shape, dtype=np.uint8)
+    
 
 # 將影片轉成影格圖片 (list)
 def extract_frame(video):
@@ -79,6 +80,22 @@ def extract_frame(video):
     
     return frames , fps
 
+# 將webm影片轉成影格圖片 (list)
+def extract_frame_webm(video):
+    cap = cv2.VideoCapture(video)
+    currentframe = 0
+    frames=[]
+    while(True): 
+        # reading from frame 
+        ret,img = cap.read() 
+        if ret: 
+            frames.append(cv2.cvtColor(img , cv2.COLOR_BGR2RGB))
+            currentframe += 1
+        else: 
+            break
+    cap.release(); 
+    return frames, 30
+
 # 將frames轉成影片
 def frame_to_film(img_list , video_write_path ,fps):
     frame = img_list[0]
@@ -86,13 +103,13 @@ def frame_to_film(img_list , video_write_path ,fps):
     # video = cv2.VideoWriter(video_write_path, cv2.VideoWriter_fourcc(*'DIVX'), fps , (width,height))
     video = cv2.VideoWriter(video_write_path, cv2.VideoWriter_fourcc('a', 'v', 'c', '1'), fps , (width,height))
     for i in range(len(img_list)):        
-        video.write(img_list[i][:,:,::-1])   
+        video.write(img_list[i][:,:,::-1]) 
     video.release()
     
 
 def getVideoLandmark():
     # Read images
-    imgs , fps = extract_frame(vedio_target_path)
+    imgs , fps = extract_frame_webm(vedio_target_path)
     print(len(imgs))
     lm_list=[]
     for index,image in  enumerate(imgs):

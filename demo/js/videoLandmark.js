@@ -7,6 +7,7 @@ const addFile = () => {
       // 上傳 Image 檔案
       const formData = new FormData();
       formData.append("videoFile", vildeoFile[0]);
+      formData.append("fileName", 'srcVideo.webm');
       document.getElementById("loading").classList.remove("d-none");
       axios.post(`http://127.0.0.1:5000/upload`, formData,
         {
@@ -26,7 +27,7 @@ const addFile = () => {
               videoPlayerSrc.innerHTML = '';
               videoPlayerSrc.classList.remove("d-none");
               const playerSrc = videojs('videoPlayer-src', {
-                sources: [{ src: `http://localhost:5000/static/srcVideo.mov` }],
+                sources: [{ src: `http://localhost:5000/static/srcVideo.webm` }],
                 loop: false,
                 autoplay: 'muted',
                 // height: "350",
