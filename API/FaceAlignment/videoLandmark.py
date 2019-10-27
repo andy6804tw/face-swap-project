@@ -16,7 +16,7 @@ import os
 # from IPython import display
 # vedio_target_path='./test_video.mp4'
 # vedio_target_path='FaceAlignment/test.mov'
-vedio_target_path='app/static/srcVideo.mp4'
+vedio_target_path='app/static/srcVideo.mov'
 # img_target_path = './Evans_test.png'
 # img_target_path='FaceAlignment/image/test11.jpg'
 
@@ -47,7 +47,7 @@ def plot_landmarks(frame, landmarks):
 
     fig.canvas.draw()
     data = PIL.Image.frombuffer('RGB', fig.canvas.get_width_height(), fig.canvas.tostring_rgb(), 'raw', 'RGB', 0, 1)
-    # plt.close()
+    plt.close()
     # plt.show()
     # display.clear_output(wait=True)
     print('done')
