@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link href="//vjs.zencdn.net/7.3.0/video-js.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/style-white.css">
   <link rel="stylesheet" href="./css/move-top.css">
   <link rel="stylesheet" href="./css/loading.css">
@@ -125,24 +125,29 @@
             </fieldset>
             <fieldset>
               <section>
-                  <div class="left">
-                      <div id="startButton" class="button">
-                        Start
-                      </div>
-                      <h4>Preview</h4>
-                      <video id="preview" width="160" height="120" autoplay muted></video>
+                <div class="row justify-content-center align-items-center text-center">
+                  <div class="col-6">
+                    <div id="startButton" class="btnRecord">
+                      Start
                     </div>
-                    <div class="right">
-                      <div id="stopButton" class="button">
-                        Stop
-                      </div>
-                      <h4>Recording</h4>
-                      <video id="recording" width="160" height="120" controls></video>
-                      <a id="downloadButton" class="button">
-                        Download
-                      </a>
-                      <a onclick="upload()">upload</a>
+                    <h5>Preview</h5>
+                    <video id="preview" width="160" height="120" autoplay muted></video>
+                  </div>
+                  <div class="col-6">
+                    <div id="stopButton" class="btnRecord">
+                      Stop
                     </div>
+                    <h5>Recording</h5>
+                    <video id="recording" width="160" height="120" controls></video>
+                  </div>
+                </div>
+                <a id="downloadButton" class="btnRecord">
+                  Download
+                </a>
+                <a onclick="upload()" class="btnRecord pt-2">upload</a>
+                <div>
+                  <pre id="log"></pre>
+                </div>
               </section>
             </fieldset>
             <footer>
@@ -211,6 +216,7 @@
   </p>
 
   <script src="./js/index.js"></script>
+  <script src="./js/recorder.js"></script>
   <script src="./js/videoSwap.js"></script>
   <!-- <script src="../js/modal.min.js"></script> -->
 </body>

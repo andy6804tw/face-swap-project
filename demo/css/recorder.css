@@ -1,9 +1,11 @@
 video {
+  width: 100%;
+  min-height: 350px;
   margin-top: 2px;
   border: 1px solid black;
 }
 
-.left .button,.right .button {
+.btnRecord {
   cursor: pointer;
   display: block;
   width: 160px;
@@ -13,18 +15,4 @@ video {
   color: white;
   background-color: darkgreen;
   text-decoration: none;
-}
-
-.left {
-  margin-right: 10px;
-  float: left;
-  width: 160px;
-  padding: 0px;
-}
-
-.right {
-  margin-left: 10px;
-  float: left;
-  width: 160px;
-  padding: 0px;
 }
