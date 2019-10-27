@@ -1,3 +1,5 @@
+let videoName=''
+
 /** Post File */
 const addFile = () => {
   // File
@@ -19,15 +21,16 @@ const addFile = () => {
         var dataObject = response.data;
         console.log(dataObject);
         const formData = new FormData();
-        console.log(vildeoFile[0].name);
         if (vildeoFile.length){
+          videoName=`srcVideo.${vildeoFile[0].name.split(".")[1]}`;
           formData.append("videoFile", vildeoFile[0]);
-          formData.append("fileName", `srcVideo.${vildeoFile[0].name.split('.')[0]}`);
+          formData.append("fileName", videoName);
         }
         else {
           const recordFile = new File([recordedBlob], "webm");
+          videoName='srcVideo.webm'
           formData.append("videoFile", recordFile);
-          formData.append("fileName", 'srcVideo.webm');
+          formData.append("fileName", videoName);
         }
         document.getElementById("loading").classList.remove("d-none");
         axios.post(`http://127.0.0.1:5000/upload`, formData,
@@ -39,8 +42,11 @@ const addFile = () => {
           .then(function (response) {
             var dataObject = response.data;
             console.log(dataObject);
-            axios.get(`http://localhost:5000/swap/video`)
-              .then((response) => {
+            axios.post(`http://localhost:5000/swap/video`,
+              {
+                videoName
+              }
+            ).then((response) => {
                 const dataObject = response.data;
                 console.log(dataObject);
                 // Render result video
