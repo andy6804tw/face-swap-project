@@ -22,4 +22,5 @@ def video():
   if request.method == 'GET':
     return videoLandmark.getVideoLandmark()
   else:
-    return videoLandmark.getVideoLandmark()
+    videoName=request.get_json()['videoName']
+    return videoLandmark.getVideoLandmark(videoName)

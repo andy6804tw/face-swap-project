@@ -18,7 +18,7 @@ const addFile = () => {
         .then(function (response) {
           var dataObject = response.data;
           console.log(dataObject);
-          axios.get(`http://localhost:5000/alignment/landmark/video`)
+          axios.post(`http://localhost:5000/alignment/landmark/video`)
             .then((response) => {
               const dataObject = response.data;
               console.log(dataObject);

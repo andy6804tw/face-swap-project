@@ -11,7 +11,6 @@ def uploadFile():
   emptyFolder()
   if request.method == 'POST' and 'videoFile'  in request.files:
     splitName=request.files['videoFile'].filename.split('.')
-    print(request.form['fileName'])
     request.files['videoFile'].filename='srcVideo.'+splitName[len(splitName)-1]
     filename = upFile.save(request.files['videoFile'])
     # file_url = upFile.url(filename)

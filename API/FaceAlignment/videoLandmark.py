@@ -15,10 +15,8 @@ import os
 # for display in jupyterhub
 # from IPython import display
 # vedio_target_path='./test_video.mp4'
-# vedio_target_path='FaceAlignment/test.mov'
-vedio_target_path='app/static/srcVideo.mp4'
-# img_target_path = './Evans_test.png'
-# img_target_path='FaceAlignment/image/test11.jpg'
+vedio_target_path='FaceAlignment/test_video.mp4'
+# vedio_target_path='app/static/srcVideo.mp4'
 
 
 fa = FaceAlignment(LandmarksType._2D, device='cpu')
@@ -106,7 +104,10 @@ def frame_to_film(img_list , video_write_path ,fps):
     video.release()
     
 
-def getVideoLandmark():
+def getVideoLandmark(videoName=''):
+    if videoName != '':
+        global vedio_target_path
+        vedio_target_path='app/static/'+videoName
     # Read images
     imgs , fps = extract_frame_webm(vedio_target_path)
     print(len(imgs))
