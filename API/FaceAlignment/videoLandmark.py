@@ -109,10 +109,10 @@ def getVideoLandmark(videoName=''):
         global vedio_target_path
         vedio_target_path='app/static/'+videoName
     # Read images
-    imgs , fps = extract_frame_webm(vedio_target_path)
+    imgs , fps = extract_frame(vedio_target_path)
     print(len(imgs))
     lm_list=[]
-    for index,image in  enumerate(imgs[0:1]):
+    for index,image in  enumerate(imgs):
         lm_list.append(process_img_to_lm(image,fa))
         print(index,'done')
     lm_list = np.array(lm_list)
