@@ -22,7 +22,6 @@ const postImage = async () => {
       document.getElementById('imgSrc').src=`data:image/jpeg;base64,${srcImg}`;
       document.getElementById('imgRes').src = `data:image/jpeg;base64,${responseImg}`;
       document.getElementById("loading").classList.add("d-none");
-      window.location.href = '#showResult';
     },
       (error) => {
         var message = error.response.data.message;

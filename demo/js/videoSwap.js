@@ -1,4 +1,5 @@
 let videoName=''
+let imageName=''
 
 /** Post File */
 const addFile = () => {
@@ -9,7 +10,9 @@ const addFile = () => {
     document.getElementById("loading").classList.remove("d-none");
     // 上傳 Image 檔案
     const formData = new FormData();
+    imageName=`srcImage.${imageFile[0].name.split(".")[1]}`;
     formData.append("imageFile", imageFile[0]);
+    formData.append("fileName", imageName);
     document.getElementById("loading").classList.remove("d-none");
     axios.post(`http://127.0.0.1:5000/upload`, formData,
       {
@@ -44,6 +47,7 @@ const addFile = () => {
             console.log(dataObject);
             axios.post(`http://localhost:5000/swap/video`,
               {
+                imageName,
                 videoName
               }
             ).then((response) => {
@@ -57,10 +61,11 @@ const addFile = () => {
                   sources: [{ src: `http://localhost:5000/static/${dataObject.token}-out.mp4` }],
                   loop: false,
                   autoplay: 'muted',
-                  width: "720",
+                  // width: "720",
                   controls: true
                 });
                 document.getElementById("loading").classList.add("d-none");
+                window.location.href = '#showResult';
               },
                 (error) => {
                   var message = error.response.data.message;
