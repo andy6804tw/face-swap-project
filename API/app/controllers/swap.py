@@ -21,7 +21,9 @@ def add():
 @swap.route('/video', methods=['POST'])
 def video():
   videoName=request.get_json()['videoName']
-  result=videoSwap.i2vSwap(videoName)
+  imageName=request.get_json()['imageName']
+  print(imageName)
+  result=videoSwap.i2vSwap(imageName, videoName)
   return  result
 
 @swap.route('/show')

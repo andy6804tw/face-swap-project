@@ -10,14 +10,14 @@ upFile = UploadSet('upFile',extensions=AllExcept(()))
 def uploadFile():
   emptyFolder()
   if request.method == 'POST' and 'videoFile'  in request.files:
-    splitName=request.files['videoFile'].filename.split('.')
-    request.files['videoFile'].filename='srcVideo.'+splitName[len(splitName)-1]
+    videoName=request.form['fileName']
+    request.files['videoFile'].filename=videoName
     filename = upFile.save(request.files['videoFile'])
     # file_url = upFile.url(filename)
     return 'don'
   elif request.method == 'POST' and 'imageFile'  in request.files:
-    splitName=request.files['imageFile'].filename.split('.')
-    request.files['imageFile'].filename='srcImage.'+splitName[len(splitName)-1]
+    imageName=request.form['fileName']
+    request.files['imageFile'].filename=imageName
     filename = upFile.save(request.files['imageFile'])
     # file_url = upFile.url(filename)
     return 'don'
