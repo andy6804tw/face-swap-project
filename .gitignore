@@ -3,6 +3,7 @@ FaceSwap-model/results
 FaceSwap-model/video
 API/FaceSwap/video
 API/app/static
+.ipynb_checkpoints
 
 # VScode
 .vscode
