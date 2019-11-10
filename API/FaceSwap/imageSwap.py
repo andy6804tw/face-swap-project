@@ -75,7 +75,7 @@ def i2iSwap(insertValues):
     else:
         src_img=base64_cv2(insertValues['image1'])
         dst_img=base64_cv2(insertValues['image2'])
-    warp_2d= True
+    warp_2d= False
     correct_color = True
 
     # Select src face
