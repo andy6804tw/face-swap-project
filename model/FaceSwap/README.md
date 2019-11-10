@@ -2,6 +2,7 @@
 Swap face between two photos for Python 3 with OpenCV and dlib.
 
 ## Get Started
+
 ```sh
 python main.py --src static/test1.jpg --dst static/test2.jpg --out output/test.jpg --correct_color
 ```
@@ -25,7 +26,8 @@ python main.py --src static/test1.jpg --dst static/test2.jpg --out output/test.j
 * OpenCV 3: `conda install opencv` (If you have conda/anaconda)
 
 Note: See [requirements.txt](requirements.txt) for more details.
-```
+
+
 ### Swap Your Face
 ```sh
 python main.py ...
@@ -42,6 +44,7 @@ python video_handler.py --src_img static/test1.jpg
 python video_handler.py --src_img static/test1.jpg --video_path static/test_video.mp4
 ```
 Make sure the landmarks actually locate in the face. Then drag the left mouse to make a rectangle, it should surround the face. Finally, we handle our video. Note that the demo works best with good, even lighting. The demo also needs support for opencv TRACKER(see config).
+
 ![image](demo/demo.gif)
 
 
