@@ -42,7 +42,7 @@ python video_handler.py --src_img imgs/test7.jpg
 ```
 ### Video
 ```sh
-python video_handler.py --src_img imgs/test7.jpg --video_path video/test.mov
+python video_handler.py --src_img static/test1.jpg --video_path static/test_video.mp4
 ```
 Make sure the landmarks actually locate in the face. Then drag the left mouse to make a rectangle, it should surround the face. Finally, we handle our video. Note that the demo works best with good, even lighting. The demo also needs support for opencv TRACKER(see config).
 ![image](imgs/realtime0.gif)
