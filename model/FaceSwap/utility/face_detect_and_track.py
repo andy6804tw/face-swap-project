@@ -5,7 +5,7 @@ import logging
 import time
 import math
 import argparse
-from FaceSwap.config import *
+from utility.config import *
 logging.basicConfig(level=logging.DEBUG,
                     format="%(levelname)s:%(lineno)d:%(message)s")
 

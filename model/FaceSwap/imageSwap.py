@@ -70,8 +70,8 @@ def base64_cv2(base64_str):
 def i2iSwap(insertValues):
     # Read images
     if insertValues=='':
-        src_img = cv2.imread('./imgs/test1.jpg')
-        dst_img = cv2.imread('./imgs/test2.jpg')
+        src_img = cv2.imread('./static/test1.jpg')
+        dst_img = cv2.imread('./static/test2.jpg')
     else:
         src_img=base64_cv2(insertValues['image1'])
         dst_img=base64_cv2(insertValues['image2'])

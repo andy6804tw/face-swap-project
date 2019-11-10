@@ -4,11 +4,10 @@ import dlib
 import logging
 import time
 import argparse
-from flask import jsonify
-from FaceSwap.config import *
-from FaceSwap.face_detect_and_track import *
-from FaceSwap.face_points_detection import *
-from FaceSwap.face_swap import *
+from utility.config import *
+from utility.face_detect_and_track import *
+from utility.face_points_detection import *
+from utility.face_swap import *
 
 
 class VideoHandler(object):
@@ -37,26 +36,6 @@ class VideoHandler(object):
             return False
         src_face_rect = self.bbox_to_rect(src_face)
         self.src_points = face_points_detection(self.src_img, src_face_rect)
-
-        # shrink the size of src image, to speed up. Although it is not obvious.
-        # src_points_face = self.src_img.copy()
-        # for (point_index, point) in enumerate(self.src_points):
-        #     cv2.circle(src_points_face,
-        #                (point[0], point[1]), 2, (0, 0, 255), -1)
-        logging.info('''Select the Face and then press SPACE or ENTER button!
-Cancel the selection process by pressing c button!''')
-        # while True:
-        #     initBB = cv2.selectROI("src_roi", src_points_face,
-        #                            fromCenter=False, showCrosshair=False)
-        #     if initBB != (0, 0, 0, 0):
-        #         break
-        # cv2.destroyWindow("src_roi")
-        # (x, y, w, h) = initBB
-        # (x, y, w, h)=(90 ,266, 372 ,402)
-        # print(x,y,h,w)
-        # self.src_points -= (x, y)
-        # self.src_img = self.src_img[y:y + h, x:x + w]
-        # print(self.src_points)
         
         src_mask = mask_from_points(self.src_img.shape[:2], self. src_points)
         self.src_only_face = apply_mask(self.src_img, src_mask)
@@ -253,7 +232,7 @@ Cancel the selection process by pressing c button!''')
             if checked:
                 # fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
                 fourcc = cv2.VideoWriter_fourcc('a', 'v', 'c', '1')
-                video = cv2.VideoWriter('app/static/'+str(ts)+'-out.mp4' , fourcc, 8, (width,height))
+                video = cv2.VideoWriter('./output/'+str(ts)+'-out.mp4' , fourcc, 8, (width,height))
                 checked=False
             video.write(frame)
             end_tc = cv2.getTickCount()
@@ -280,21 +259,11 @@ Cancel the selection process by pressing c button!''')
 
 
 def i2vSwap(imageName, videoName):
-    # logging.basicConfig(level=logging.INFO,
-    #                     format="%(levelname)s:%(lineno)d:%(message)s")
-
-    # parser = argparse.ArgumentParser(description='FaceSwap Video')
-    # parser.add_argument('--src_img', required=True,
-    #                     help='Path for source image')
-    # parser.add_argument('--video_path', default=0,
-    #                     help='Path for video')
-    # args = parser.parse_args()
-    # video_path = args.video_path
-    test = VideoHandler('app/static/'+ videoName)
-    test.set_src_img('app/static/'+ imageName)
+    test = VideoHandler('./static/'+ videoName)
+    test.set_src_img('./static/'+ imageName)
     processResult=test.process_src_img()
     if(processResult):
         result =test.cascade_vh()
-        return jsonify({'result':200,'token':result})
+        return {'result':200,'token':result}
     else:
-        return jsonify({'result':401,'message':'No face detected in src image!'})
+        return {'result':401,'message':'No face detected in src image!'}
