@@ -6,9 +6,9 @@ import numpy as np
 import base64 
 import matplotlib.pyplot as plt
 
-from face_detection import face_detection
-from face_points_detection import face_points_detection
-from face_swap import warp_image_2d, warp_image_3d, mask_from_points, apply_mask, correct_colours, transformation_from_points
+from utility.face_detection import face_detection
+from utility.face_points_detection import face_points_detection
+from utility.face_swap import warp_image_2d, warp_image_3d, mask_from_points, apply_mask, correct_colours, transformation_from_points
 
 # select_face
 def select_face(im, r=10):
