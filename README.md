@@ -3,11 +3,19 @@
 ![](screenshot/img01.png)
 
 ### Face Swap
-#### 1. image2image  face swap
-![](screenshot/img02.gif)
+#### 1. image2image face swap
+![](screenshot/demo1.gif)
 
 #### 2. image2video face swap
-![](screenshot/img03.gif)
+![](screenshot/demo2.gif)
+
+### Face Alignment 
+#### 1. Image landmark
+![](screenshot/demo3.gif)
+
+#### 2. Video landmark
+![](screenshot/demo4.gif)
+
 
 ## Reference
 [videowriter](https://stackoverflow.com/questions/10605163/opencv-videowriter-under-osx-producing-no-output)
