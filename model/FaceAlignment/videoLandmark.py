@@ -1,6 +1,5 @@
 from face_alignment import FaceAlignment,LandmarksType
 from glob import glob
-from flask import jsonify
 import matplotlib
 # matplotlib.use('TkAgg')
 matplotlib.use('agg')
@@ -15,7 +14,7 @@ import os
 # for display in jupyterhub
 # from IPython import display
 # vedio_target_path='./test_video.mp4'
-vedio_target_path='FaceAlignment/test_video.mp4'
+vedio_target_path='static/test_video.mp4'
 # vedio_target_path='app/static/srcVideo.mp4'
 
 
@@ -107,7 +106,7 @@ def frame_to_film(img_list , video_write_path ,fps):
 def getVideoLandmark(videoName=''):
     if videoName != '':
         global vedio_target_path
-        vedio_target_path='app/static/'+videoName
+        vedio_target_path='./static/'+videoName
     # Read images
     imgs = []
     fps = 0
@@ -125,5 +124,5 @@ def getVideoLandmark(videoName=''):
      # 將landmark轉成影片
     # frame_to_film(lm_list,'FaceAlignment/testing.mp4',fps)
     ts = int(time.time())
-    frame_to_film(lm_list,'app/static/'+str(ts)+'-out.mp4',fps)
-    return jsonify({'result':200,'token':str(ts)})
+    frame_to_film(lm_list,'output/'+str(ts)+'-out.mp4',fps)
+    return {'result':200,'token':str(ts)}

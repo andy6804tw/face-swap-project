@@ -8,7 +8,7 @@ mode 2: face change on video
 """
 
 
-mode="1"
+mode="2"
 
 if __name__ == '__main__':
     if mode=="1":
@@ -17,4 +17,4 @@ if __name__ == '__main__':
         cv2.waitKey(0)
         cv2.destroyAllWindows()
     else:
-        videoLandmark.getVideoLandmark('')
+        videoLandmark.getVideoLandmark('test_video.mp4')

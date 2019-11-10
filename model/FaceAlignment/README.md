@@ -13,3 +13,9 @@ python run.py
 | Source  | Result |
 | --- | --- |
 |![](static/test1.jpg) | ![](demo/test1-1.jpg) |
+
+- Mode 2
+
+| Source  | Result |
+| --- | --- |
+|![](demo/demo2-1.gif) | ![](demo/demo2-2.gif) |
