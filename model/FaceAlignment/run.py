@@ -3,12 +3,12 @@ import videoLandmark as videoLandmark
 import cv2
 
 """
-mode 1: two image swap face
-mode 2: face change on video
+mode 1: image landmark
+mode 2: video landmark
 """
 
 
-mode="2"
+mode="1"
 
 if __name__ == '__main__':
     if mode=="1":
