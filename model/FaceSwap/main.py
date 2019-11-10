@@ -4,10 +4,11 @@ import cv2
 import argparse
 
 import numpy as np
+import matplotlib.pyplot as plt
 
-from face_detection import face_detection
-from face_points_detection import face_points_detection
-from face_swap import warp_image_2d, warp_image_3d, mask_from_points, apply_mask, correct_colours, transformation_from_points
+from utility.face_detection import face_detection
+from utility.face_points_detection import face_points_detection
+from utility.face_swap import warp_image_2d, warp_image_3d, mask_from_points, apply_mask, correct_colours, transformation_from_points
 
 
 def select_face(im, r=10):
@@ -67,7 +68,6 @@ if __name__ == '__main__':
     # Read images
     src_img = cv2.imread(args.src)
     dst_img = cv2.imread(args.dst)
-
     # Select src face
     src_points, src_shape, src_face = select_face(src_img)
     # Select dst face
@@ -113,7 +113,6 @@ if __name__ == '__main__':
     dst_img_cp = dst_img.copy()
     dst_img_cp[y:y+h, x:x+w] = output
     output = dst_img_cp
-    print(output)
 
     dir_path = os.path.dirname(args.out)
     if not os.path.isdir(dir_path):
@@ -121,10 +120,9 @@ if __name__ == '__main__':
 
     cv2.imwrite(args.out, output)
 
-    ##For debug
-    # if not args.no_debug_window:
-    #     cv2.imshow("From", dst_img)
-    #     cv2.imshow("To", output)
-    #     cv2.waitKey(0)
-        
-    #     cv2.destroyAllWindows()
+    #For debug
+    if not args.no_debug_window:
+        cv2.imshow("From", dst_img)
+        cv2.imshow("To", output)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
